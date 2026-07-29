@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sean — Cloud & Cyber Security Analyst</title>
+<meta name="description" content="Sean — Cloud & Cyber Security Analyst. SIEM log engineering, threat hunting, and cloud security case files.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Courier+Prime:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cork:#8a6a45; --cork-dk:#5f4529; --cork-lt:#a1825a;
+    --card:#f3e9d2; --card-dk:#e4d3ac;
+    --ink:#2a2013; --ink-soft:#5b4a34;
+    --red:#a53b32; --red-dk:#7e2c26;
+    --amber:#c98a3a;
+    --stamp:#3f6b45;
+    --display:'Special Elite', cursive;
+    --mono:'Courier Prime', ui-monospace, monospace;
+    --sans:'Inter', -apple-system, sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:var(--sans); color:var(--ink); line-height:1.6;
+    background-color:var(--cork);
+    background-image:
+      radial-gradient(circle at 20% 15%, rgba(255,255,255,0.05), transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(0,0,0,0.12), transparent 45%),
+      repeating-radial-gradient(circle at 50% 50%, rgba(0,0,0,0.035) 0, rgba(0,0,0,0.035) 1px, transparent 1px, transparent 3px);
+    background-attachment:fixed;
+    -webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
+    background:radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.28) 100%);
+  }
+  a{color:inherit; text-decoration:none;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--red); outline-offset:3px;}
+  .wrap{max-width:920px; margin:0 auto; padding:0 24px; position:relative; z-index:1;}
+
+  /* ---------- NAV ---------- */
+  nav{position:sticky; top:0; z-index:20; background:rgba(58,42,25,0.82); backdrop-filter:blur(6px); border-bottom:2px solid var(--cork-dk);}
+  nav .wrap{display:flex; align-items:center; justify-content:space-between; height:56px;}
+  .brand{font-family:var(--display); font-size:15px; color:var(--card);}
+  .navlinks{display:flex; gap:22px; font-family:var(--mono); font-size:12.5px; color:var(--card-dk); font-weight:700;}
+  .navlinks a:hover{color:#fff;}
+
+  /* ---------- pin ---------- */
+  .pin{
+    width:16px; height:16px; border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, #e8746b, var(--red-dk) 70%);
+    box-shadow:0 3px 4px rgba(0,0,0,0.45), inset 0 1px 1px rgba(255,255,255,0.4);
+    position:absolute; left:50%; transform:translateX(-50%);
+  }
+
+  /* ---------- HERO ---------- */
+  header.hero{padding:90px 0 40px;}
+  .folder{
+    position:relative; background:var(--card);
+    box-shadow:0 14px 30px rgba(0,0,0,0.35), 0 2px 0 rgba(0,0,0,0.15);
+    border-radius:2px; padding:44px 40px 36px;
+    transform:rotate(-0.6deg);
+    max-width:640px; margin:0 auto;
+  }
+  .folder::after{
+    content:''; position:absolute; inset:0; border-radius:2px; pointer-events:none;
+    background-image:repeating-radial-gradient(circle at 30% 20%, rgba(0,0,0,0.02) 0, rgba(0,0,0,0.02) 1px, transparent 1px, transparent 3px);
+  }
+  .tape{
+    position:absolute; width:70px; height:26px; background:rgba(255,255,255,0.35);
+    border:1px solid rgba(0,0,0,0.05); box-shadow:0 2px 4px rgba(0,0,0,0.15);
+  }
+  .tape.tl{ top:-14px; left:36px; transform:rotate(-8deg);}
+  .tape.tr{ top:-12px; right:30px; transform:rotate(6deg);}
+
+  .stamp-tag{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:1px;
+    color:var(--stamp); border:2px solid var(--stamp); border-radius:3px;
+    padding:4px 10px; text-transform:uppercase; transform:rotate(-2deg);
+    margin-bottom:18px;
+  }
+  .stamp-tag .dot{width:6px; height:6px; border-radius:50%; background:var(--stamp);}
+
+  h1{font-family:var(--display); font-size:clamp(34px,6vw,52px); line-height:1.05; color:var(--ink); margin-bottom:6px;}
+  .role{font-family:var(--mono); font-size:14px; font-weight:700; color:var(--red-dk); letter-spacing:0.5px; margin-bottom:20px;}
+  .lede{color:var(--ink-soft); font-size:15.5px; max-width:56ch; margin-bottom:24px;}
+
+  .typed-line{display:flex; align-items:baseline; gap:6px; font-family:var(--mono); font-size:12px; color:var(--ink-soft); margin-bottom:6px;}
+  .typed-line b{color:var(--ink); font-weight:700;}
+
+  .cta-row{display:flex; gap:10px; margin-top:26px; flex-wrap:wrap;}
+  .btn{
+    font-family:var(--mono); font-size:12.5px; font-weight:700; padding:10px 18px;
+    border-radius:2px; border:2px solid var(--ink); transition:all .15s ease; letter-spacing:0.3px;
+  }
+  .btn-primary{background:var(--ink); color:var(--card);}
+  .btn-primary:hover{background:var(--red-dk); border-color:var(--red-dk);}
+  .btn-ghost{color:var(--ink); background:transparent;}
+  .btn-ghost:hover{background:var(--ink); color:var(--card);}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:52px 0;}
+  .section-head{display:flex; align-items:baseline; gap:10px; margin-bottom:22px;}
+  .section-head .idx{font-family:var(--mono); color:var(--card); background:var(--ink); padding:2px 8px; border-radius:2px; font-size:12px; font-weight:700;}
+  .section-head h2{font-family:var(--display); font-size:24px; color:var(--card);}
+  .section-sub{color:var(--card-dk); font-size:14.5px; max-width:60ch; margin-bottom:26px;}
+
+  .index-card{
+    background:var(--card); border-radius:2px; box-shadow:0 8px 18px rgba(0,0,0,0.3);
+    padding:30px 32px; position:relative;
+  }
+  .index-card.r1{transform:rotate(0.5deg);}
+  .index-card.r2{transform:rotate(-0.4deg);}
+
+  .tl-list{list-style:none;}
+  .tl-item{
+    display:flex; align-items:baseline; gap:8px; padding:12px 0;
+    border-bottom:1px dashed rgba(42,32,19,0.25); font-size:14px;
+  }
+  .tl-item:last-child{border-bottom:none;}
+  .tl-label{font-weight:600; color:var(--ink); white-space:nowrap;}
+  .tl-fill{flex:1; border-bottom:1px dotted rgba(42,32,19,0.4); transform:translateY(-4px);}
+  .tl-link{font-family:var(--mono); font-size:12.5px; color:var(--red-dk); white-space:nowrap;}
+  .tl-link:hover{text-decoration:underline;}
+
+  .arsenal-group{margin-bottom:20px;}
+  .arsenal-group h3{font-family:var(--mono); font-size:11px; color:var(--card-dk); text-transform:uppercase; letter-spacing:1px; margin-bottom:10px;}
+  .stamps{display:flex; flex-wrap:wrap; gap:10px;}
+  .toolstamp{
+    font-family:var(--mono); font-size:12px; font-weight:700; padding:6px 12px;
+    border:2px solid var(--card); color:var(--card); border-radius:3px; letter-spacing:0.5px;
+  }
+
+  /* ---------- CASE FILES with string board ---------- */
+  .board{position:relative; padding-top:70px;}
+  .board-pin-wrap{position:absolute; top:0; left:50%; transform:translateX(-50%); z-index:3;}
+  .board-pin-wrap .pin{position:static; width:20px; height:20px;}
+  svg.strings{position:absolute; top:0; left:0; width:100%; height:100%; z-index:1; overflow:visible;}
+  svg.strings path{
+    fill:none; stroke:var(--red); stroke-width:2; opacity:0.85;
+    stroke-dasharray:600; stroke-dashoffset:600;
+    transition:stroke-dashoffset 1.1s ease;
+  }
+  svg.strings path.drawn{stroke-dashoffset:0;}
+
+  .cases-row{display:flex; gap:22px; position:relative; z-index:2; flex-wrap:wrap;}
+  .case-folder{
+    flex:1 1 260px; background:var(--card); border-radius:2px;
+    box-shadow:0 10px 22px rgba(0,0,0,0.32); padding:24px 22px 22px; position:relative;
+    min-width:240px;
+  }
+  .case-folder:nth-child(1){transform:rotate(-1.4deg);}
+  .case-folder:nth-child(2){transform:rotate(0.8deg);}
+  .case-folder:nth-child(3){transform:rotate(-0.5deg);}
+  .case-folder .pin{top:-8px;}
+
+  .stamp-closed{
+    position:absolute; top:14px; right:14px; font-family:var(--mono); font-weight:700; font-size:13px;
+    color:var(--stamp); border:2.5px solid var(--stamp); border-radius:4px; padding:3px 9px;
+    transform:rotate(11deg); letter-spacing:1px; opacity:0.85;
+  }
+  .case-num{font-family:var(--mono); font-size:11px; color:var(--red-dk); font-weight:700; margin-bottom:8px;}
+  .case-title{font-family:var(--display); font-size:17px; color:var(--ink); line-height:1.3; margin-bottom:10px; padding-right:56px;}
+  .case-title a:hover{color:var(--red-dk);}
+  .case-desc{font-size:13px; color:var(--ink-soft); margin-bottom:14px;}
+  .mitre-tags{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:14px;}
+  .mitre-tag{font-family:var(--mono); font-size:10.5px; border:1px solid var(--ink-soft); color:var(--ink-soft); padding:2px 7px; border-radius:2px;}
+  .open-file{font-family:var(--mono); font-size:12px; font-weight:700; color:var(--red-dk);}
+  .open-file:hover{text-decoration:underline;}
+
+  @media (max-width:760px){
+    .navlinks{display:none;}
+    .cases-row{flex-direction:column;}
+    svg.strings{display:none;}
+    .board{padding-top:0;}
+    .board-pin-wrap{display:none;}
+    .case-folder{border-left:3px solid var(--red);}
+  }
+
+  /* ---------- footer ---------- */
+  footer{padding:20px 0 70px;}
+  .foot-row{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; margin-top:18px;}
+  .foot-note{font-family:var(--mono); font-size:11px; color:var(--card-dk);}
+
+  @media (prefers-reduced-motion: reduce){
+    svg.strings path{transition:none; stroke-dashoffset:0;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">CASE FILE: SEAN</div>
+    <div class="navlinks">
+      <a href="#focus">focus</a>
+      <a href="#skills">skills</a>
+      <a href="#cases">case files</a>
+      <a href="#contact">contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="folder">
+      <span class="tape tl"></span><span class="tape tr"></span>
+      <div class="stamp-tag"><span class="dot"></span> ACTIVE FILE</div>
+      <h1>Sean</h1>
+      <div class="role">Cloud &amp; Cyber Security Analyst</div>
+      <p class="lede">
+        Security analyst with hands-on experience in alert triage, log analysis, SIEM investigation
+        using Splunk, network traffic analysis with Wireshark, and MITRE ATT&amp;CK-based threat
+        detection — backed by practical cloud security knowledge.
+      </p>
+      <div class="typed-line"><span>HANDLE:</span> <b>Seanfrvr</b></div>
+
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#cases">Open Case Files →</a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/sean-ngwengwe-04354b3bb/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn btn-ghost" href="https://github.com/Seanfrvr" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="focus">
+  <div class="wrap">
+    <div class="section-head"><span class="idx">01</span><h2>Focus</h2></div>
+    <div class="index-card r1">
+      <p style="color:var(--ink-soft); font-size:14.5px;">
+        Operating at the intersection of SIEM log engineering, cloud infrastructure security, and
+        packet-level network analysis. Built to detect, analyze, and contain threats across enterprise
+        attack surfaces.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head"><span class="idx">02</span><h2>Skills &amp; Projects</h2></div>
+    <div class="index-card r2">
+      <ul class="tl-list">
+        <li class="tl-item">
+          <span class="tl-label">SIEM Log Ingestion &amp; Threat Hunting</span>
+          <span class="tl-fill"></span>
+          <a class="tl-link" href="https://github.com/Seanfrvr/Threat-hunting-with-splunk-HL" target="_blank" rel="noopener">Splunk Threat Hunting Home Lab →</a>
+        </li>
+        <li class="tl-item">
+          <span class="tl-label">Security Operations &amp; Event Correlation</span>
+          <span class="tl-fill"></span>
+          <a class="tl-link" href="https://github.com/Seanfrvr/splunk-siem-home-lab" target="_blank" rel="noopener">Splunk SIEM Home Lab →</a>
+        </li>
+        <li class="tl-item">
+          <span class="tl-label">Cloud Security &amp; Incident Response</span>
+          <span class="tl-fill"></span>
+          <a class="tl-link" href="https://github.com/Seanfrvr/gcp-data-breach-incident-response" target="_blank" rel="noopener">GCP Data Breach Incident Response →</a>
+        </li>
+      </ul>
+    </div>
+
+    <div style="height:30px"></div>
+
+    <div class="arsenal-group">
+      <h3>SIEM &amp; Log Analysis</h3>
+      <div class="stamps"><span class="toolstamp">SPLUNK</span><span class="toolstamp">ELASTIC ELK</span></div>
+    </div>
+    <div class="arsenal-group">
+      <h3>Endpoint &amp; Network Telemetry</h3>
+      <div class="stamps"><span class="toolstamp">SYSMON</span><span class="toolstamp">WIRESHARK</span><span class="toolstamp">LINUX</span></div>
+    </div>
+    <div class="arsenal-group">
+      <h3>Cloud Security &amp; Infrastructure</h3>
+      <div class="stamps"><span class="toolstamp">GOOGLE CLOUD</span><span class="toolstamp">TERRAFORM</span><span class="toolstamp">GCP IAM</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="cases">
+  <div class="wrap">
+    <div class="section-head"><span class="idx">03</span><h2>Case Files</h2></div>
+    <p class="section-sub">
+      A Splunk home lab I built and loaded with the BOTSv3 dataset — each file below is a full
+      investigation I ran myself, with SPL queries and MITRE ATT&amp;CK mapping documented start to finish.
+    </p>
+
+    <div class="board" id="board">
+      <div class="board-pin-wrap"><div class="pin"></div></div>
+      <svg class="strings" id="strings"></svg>
+
+      <div class="cases-row">
+        <div class="case-folder" data-case>
+          <div class="pin"></div>
+          <div class="stamp-closed">CLOSED</div>
+          <div class="case-num">FILE 01</div>
+          <div class="case-title"><a href="https://github.com/Seanfrvr/Threat-hunting-with-splunk-HL/blob/main/scenarios/scenario-1-powershell.md" target="_blank" rel="noopener">Encoded PowerShell Execution</a></div>
+          <div class="case-desc">Obfuscated download cradle, decoded via CyberChef.</div>
+          <div class="mitre-tags"><span class="mitre-tag">T1059.001</span><span class="mitre-tag">T1140</span></div>
+          <a class="open-file" href="https://github.com/Seanfrvr/Threat-hunting-with-splunk-HL/blob/main/scenarios/scenario-1-powershell.md" target="_blank" rel="noopener">OPEN FILE →</a>
+        </div>
+
+        <div class="case-folder" data-case>
+          <div class="pin"></div>
+          <div class="stamp-closed">CLOSED</div>
+          <div class="case-num">FILE 02</div>
+          <div class="case-title"><a href="https://github.com/Seanfrvr/Threat-hunting-with-splunk-HL/blob/main/scenarios/scenario-2-ssh-bruteforce.md" target="_blank" rel="noopener">Linux SSH Brute Force</a></div>
+          <div class="case-desc">Password-spray attempt across 25 IPs — confirmed unsuccessful.</div>
+          <div class="mitre-tags"><span class="mitre-tag">T1110.001</span><span class="mitre-tag">T1087</span></div>
+          <a class="open-file" href="https://github.com/Seanfrvr/Threat-hunting-with-splunk-HL/blob/main/scenarios/scenario-2-ssh-bruteforce.md" target="_blank" rel="noopener">OPEN FILE →</a>
+        </div>
+
+        <div class="case-folder" data-case>
+          <div class="pin"></div>
+          <div class="stamp-closed">CLOSED</div>
+          <div class="case-num">FILE 03</div>
+          <div class="case-title"><a href="https://github.com/Seanfrvr/Threat-hunting-with-splunk-HL/blob/main/scenarios/scenario-3-aws-cloudtrail.md" target="_blank" rel="noopener">AWS CloudTrail — S3 Exposure</a></div>
+          <div class="case-desc">Compromised IAM identity, bucket exposure, zero exfiltration.</div>
+          <div class="mitre-tags"><span class="mitre-tag">T1078</span><span class="mitre-tag">T1530</span></div>
+          <a class="open-file" href="https://github.com/Seanfrvr/Threat-hunting-with-splunk-HL/blob/main/scenarios/scenario-3-aws-cloudtrail.md" target="_blank" rel="noopener">OPEN FILE →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="section-head"><span class="idx">04</span><h2>Contact</h2></div>
+    <div class="index-card r1">
+      <ul class="tl-list">
+        <li class="tl-item">
+          <span class="tl-label">GitHub</span>
+          <span class="tl-fill"></span>
+          <a class="tl-link" href="https://github.com/Seanfrvr" target="_blank" rel="noopener">github.com/Seanfrvr →</a>
+        </li>
+        <li class="tl-item">
+          <span class="tl-label">LinkedIn</span>
+          <span class="tl-fill"></span>
+          <a class="tl-link" href="https://www.linkedin.com/in/sean-ngwengwe-04354b3bb/" target="_blank" rel="noopener">in/sean-ngwengwe →</a>
+        </li>
+        <li class="tl-item">
+          <span class="tl-label">Email</span>
+          <span class="tl-fill"></span>
+          <a class="tl-link" href="mailto:seanngwe0611@gmail.com">seanngwe0611@gmail.com →</a>
+        </li>
+      </ul>
+    </div>
+    <div class="foot-row">
+      <div class="foot-note">// case file last updated 2026</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var board = document.getElementById('board');
+  var svg = document.getElementById('strings');
+  var pinWrap = document.querySelector('.board-pin-wrap .pin');
+  var cases = document.querySelectorAll('[data-case]');
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function drawStrings(){
+    if (window.innerWidth <= 760) { svg.innerHTML = ''; return; }
+    var boardRect = board.getBoundingClientRect();
+    var pinRect = pinWrap.getBoundingClientRect();
+    var startX = pinRect.left + pinRect.width/2 - boardRect.left;
+    var startY = pinRect.top + pinRect.height/2 - boardRect.top;
+
+    svg.setAttribute('width', boardRect.width);
+    svg.setAttribute('height', boardRect.height);
+    svg.innerHTML = '';
+
+    cases.forEach(function(el, i){
+      var pin = el.querySelector('.pin');
+      var r = pin.getBoundingClientRect();
+      var endX = r.left + r.width/2 - boardRect.left;
+      var endY = r.top + r.height/2 - boardRect.top;
+      var midY = (startY + endY) / 2;
+
+      var path = document.createElementNS('http://www.w3.org/2000/svg','path');
+      var d = 'M ' + startX + ' ' + startY + ' Q ' + ((startX+endX)/2) + ' ' + (midY - 18) + ' ' + endX + ' ' + endY;
+      path.setAttribute('d', d);
+      svg.appendChild(path);
+
+      setTimeout(function(){ path.classList.add('drawn'); }, reduceMotion ? 0 : 150 + i*180);
+    });
+  }
+
+  window.addEventListener('load', drawStrings);
+  window.addEventListener('resize', function(){ clearTimeout(window._rt); window._rt = setTimeout(drawStrings, 150); });
+})();
+</script>
+
+</body>
+</html>
