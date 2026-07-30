@@ -26,26 +26,22 @@
     font-family:var(--sans); color:var(--ink); line-height:1.6;
     background-color:#0d0b09;
     background-image:
-      linear-gradient(rgba(13, 11, 9, 0.4), rgba(13, 11, 9, 0.65)),
-      url('https://i.ibb.co/3kS0W70/f99c8f318c9a643d31958be63ad4f730.jpg');
-    background-position: center top;
-    background-attachment: fixed;
+      radial-gradient(circle at 80% 20%, rgba(126, 44, 38, 0.15) 0%, transparent 40%),
+      radial-gradient(circle at 20% 80%, rgba(63, 107, 69, 0.12) 0%, transparent 40%),
+      repeating-radial-gradient(circle at 50% 50%, rgba(0,0,0,0.4) 0, rgba(0,0,0,0.4) 1px, transparent 1px, transparent 3px);
+    background-attachment:fixed;
     -webkit-font-smoothing:antialiased;
   }
   body::before{
     content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
-    background:radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.3) 100%);
-  body::after{
-    content:''; position:fixed; inset:0; pointer-events:none; z-index:0; opacity:0.3;
-    mix-blend-mode:overlay;
-    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='matrix' values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.4 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    background:radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.7) 100%);
   }
   a{color:inherit; text-decoration:none;}
   a:focus-visible, button:focus-visible{outline:2px solid var(--red); outline-offset:3px;}
   .wrap{max-width:920px; margin:0 auto; padding:0 24px; position:relative; z-index:1;}
 
   /* ---------- NAV ---------- */
-  nav{position:sticky; top:0; z-index:20; background:rgba(18, 14, 10, 0.92); backdrop-filter:blur(8px); border-bottom:2px solid var(--cork-dk);}
+  nav{position:sticky; top:0; z-index:20; background:rgba(18, 14, 10, 0.95); backdrop-filter:blur(8px); border-bottom:2px solid var(--cork-dk);}
   nav .wrap{display:flex; align-items:center; justify-content:space-between; height:56px;}
   .brand{font-family:var(--display); font-size:15px; color:var(--card); letter-spacing:1px;}
   .navlinks{display:flex; gap:22px; font-family:var(--mono); font-size:12.5px; color:var(--card-dk); font-weight:700;}
@@ -116,13 +112,13 @@
     .joker-card{ display:none; }
   }
 
-  /* GRAFFITI / QUOTES OVERLAY */
+  /* GRAFFITI OVERLAY */
   .joker-graffiti{
     position:absolute; font-family:var(--display); color:var(--red);
-    opacity:0.25; pointer-events:none; font-weight:700; text-transform:uppercase;
+    opacity:0.35; pointer-events:none; font-weight:700; text-transform:uppercase;
   }
-  .graffiti-1{ top:120px; right:40px; font-size:28px; transform:rotate(-15deg); }
-  .graffiti-2{ bottom:40px; left:20px; font-size:20px; transform:rotate(8deg); }
+  .graffiti-1{ top:120px; right:20px; font-size:28px; transform:rotate(-15deg); }
+  .graffiti-2{ bottom:40px; left:10px; font-size:20px; transform:rotate(8deg); }
 
   /* ---------- SECTIONS ---------- */
   section{padding:52px 0;}
@@ -155,7 +151,7 @@
   .toolstamp{
     font-family:var(--mono); font-size:12px; font-weight:700; padding:6px 12px;
     border:2px solid var(--card); color:var(--card); border-radius:3px; letter-spacing:0.5px;
-    background: rgba(0,0,0,0.2);
+    background: rgba(0,0,0,0.3);
   }
 
   /* ---------- CASE FILES with string board ---------- */
@@ -255,12 +251,11 @@
             <circle cx="-22" cy="-19" r="2.5" fill="var(--red-dk,#7e2c26)"/>
             <circle cx="22" cy="-19" r="2.5" fill="var(--red-dk,#7e2c26)"/>
             <circle cx="0" cy="-31" r="2.5" fill="var(--red-dk,#7e2c26)"/>
-            <!-- Dark Knight Joker Face Accent -->
+            <!-- Face Accent -->
             <ellipse cx="0" cy="4" rx="14" ry="16" fill="none" stroke="var(--ink,#2a2013)" stroke-width="2"/>
-            <!-- Dark Eye Circles -->
             <circle cx="-5" cy="-1" r="3" fill="var(--ink,#2a2013)"/>
             <circle cx="5" cy="-1" r="3" fill="var(--ink,#2a2013)"/>
-            <!-- Extended Smile (Glasgow Smile) -->
+            <!-- Extended Smile -->
             <path d="M -12 6 Q 0 16 12 6" stroke="var(--red-dk,#7e2c26)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
           </g>
           <text x="8" y="120" font-family="'Courier Prime', monospace" font-size="11" fill="var(--red-dk,#7e2c26)" font-weight="700">JOKER</text>
