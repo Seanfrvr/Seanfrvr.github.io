@@ -26,17 +26,15 @@
     font-family:var(--sans); color:var(--ink); line-height:1.6;
     background-color:#0d0b09;
     background-image:
-      linear-gradient(rgba(13, 11, 9, 0.85), rgba(13, 11, 9, 0.88)),
+      linear-gradient(rgba(13, 11, 9, 0.4), rgba(13, 11, 9, 0.65)),
       url('https://i.ibb.co/3kS0W70/f99c8f318c9a643d31958be63ad4f730.jpg');
-    background-size: cover;
     background-position: center top;
     background-attachment: fixed;
     -webkit-font-smoothing:antialiased;
   }
   body::before{
     content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
-    background:radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.85) 100%);
-  }
+    background:radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.3) 100%);
   body::after{
     content:''; position:fixed; inset:0; pointer-events:none; z-index:0; opacity:0.3;
     mix-blend-mode:overlay;
