@@ -22,15 +22,17 @@
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   html{scroll-behavior:smooth;}
-  body{
+ body{
     font-family:var(--sans); color:var(--ink); line-height:1.6;
     background-color:#0d0b09;
     background-image:
-      radial-gradient(circle at 80% 20%, rgba(126, 44, 38, 0.15) 0%, transparent 40%),
-      radial-gradient(circle at 20% 80%, rgba(63, 107, 69, 0.12) 0%, transparent 40%),
-      repeating-radial-gradient(circle at 50% 50%, rgba(0,0,0,0.4) 0, rgba(0,0,0,0.4) 1px, transparent 1px, transparent 3px);
-    background-attachment:fixed;
+      linear-gradient(rgba(13, 11, 9, 0.45), rgba(13, 11, 9, 0.7)),
+      url('joker-bg.jpg');
+    background-size: cover;
+    background-position: center top;
+    background-attachment: fixed;
     -webkit-font-smoothing:antialiased;
+  }
   }
   body::before{
     content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
