@@ -22,33 +22,35 @@
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   html{scroll-behavior:smooth;}
- body{
+  body{
     font-family:var(--sans); color:var(--ink); line-height:1.6;
-    background-color:#0d0b09;
+    background-color:#0a0806;
+    /* Self-contained dark ambient overlay with Joker portrait outline + ambient lighting */
     background-image:
-      linear-gradient(rgba(13, 11, 9, 0.45), rgba(13, 11, 9, 0.7)),
-      url('joker-bg.jpg');
-    background-size: cover;
-    background-position: center top;
-    background-attachment: fixed;
+      radial-gradient(circle at 85% 15%, rgba(126, 44, 38, 0.22) 0%, transparent 45%),
+      radial-gradient(circle at 15% 85%, rgba(63, 107, 69, 0.18) 0%, transparent 45%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='900' viewBox='0 0 1200 900'%3E%3Cg opacity='0.12' fill='none' stroke='%2523ffffff' stroke-width='2'%3E%3Cpath d='M850 100 Q800 200 870 280 Q950 200 900 100 Z'/%3E%3Cpath d='M830 220 Q870 250 910 220' stroke='%2523a53b32' stroke-width='4'/%3E%3Ccircle cx='835' cy='180' r='10' fill='%2523ffffff'/%3E%3Ccircle cx='885' cy='180' r='10' fill='%2523ffffff'/%3E%3C/g%3E%3C/svg%3E"),
+      repeating-radial-gradient(circle at 50% 50%, rgba(0,0,0,0.5) 0, rgba(0,0,0,0.5) 1px, transparent 1px, transparent 3px);
+    background-attachment:fixed;
+    background-size: cover, cover, auto, auto;
     -webkit-font-smoothing:antialiased;
   }
   body::before{
     content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
-    background:radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.7) 100%);
+    background:radial-gradient(ellipse at center, transparent 20%, rgba(0,0,0,0.75) 100%);
   }
   a{color:inherit; text-decoration:none;}
   a:focus-visible, button:focus-visible{outline:2px solid var(--red); outline-offset:3px;}
   .wrap{max-width:920px; margin:0 auto; padding:0 24px; position:relative; z-index:1;}
 
   /* ---------- NAV ---------- */
-  nav{position:sticky; top:0; z-index:20; background:rgba(18, 14, 10, 0.95); backdrop-filter:blur(8px); border-bottom:2px solid var(--cork-dk);}
-  nav .wrap{display:flex; align-items:center; justify-content:space-between; height:56px;}
+  nav{position:sticky; top:0; z-index:20; background:rgba(14, 11, 8, 0.95); backdrop-filter:blur(8px); border-bottom:2px solid var(--cork-dk);}
+  nav .wrap{display:flex; align-items:center; justify-space-between; height:56px;}
   .brand{font-family:var(--display); font-size:15px; color:var(--card); letter-spacing:1px;}
   .navlinks{display:flex; gap:22px; font-family:var(--mono); font-size:12.5px; color:var(--card-dk); font-weight:700;}
   .navlinks a:hover{color:var(--red);}
 
-  /* ---------- PIN & DECORATION ---------- */
+  /* ---------- PIN & DOSSIER ---------- */
   .pin{
     width:16px; height:16px; border-radius:50%;
     background:radial-gradient(circle at 35% 30%, #e8746b, var(--red-dk) 70%);
@@ -58,10 +60,10 @@
 
   .folder{
     position:relative; background:var(--card);
-    box-shadow:0 18px 40px rgba(0,0,0,0.6), 0 2px 0 rgba(0,0,0,0.2);
+    box-shadow:0 18px 40px rgba(0,0,0,0.7), 0 2px 0 rgba(0,0,0,0.2);
     border-radius:2px; padding:44px 40px 36px;
     transform:rotate(-0.6deg);
-    max-width:640px; margin:0 auto;
+    max-width:640px; margin:20px auto 0;
   }
   .folder::after{
     content:''; position:absolute; inset:0; border-radius:2px; pointer-events:none;
@@ -100,13 +102,13 @@
   .btn-ghost{color:var(--ink); background:transparent;}
   .btn-ghost:hover{background:var(--ink); color:var(--card);}
 
-  /* JOKER CARD DECORATION */
+  /* JOKER PLAYING CARD */
   .joker-card{
-    position:absolute; bottom:-18px; right:-18px; z-index:4;
+    position:absolute; bottom:-22px; right:-20px; z-index:4;
     transform:rotate(12deg);
     filter:drop-shadow(0 10px 16px rgba(0,0,0,0.6));
     background:var(--card); border:2px solid var(--ink); border-radius:4px;
-    padding:6px; width:86px; height:124px;
+    padding:6px; width:92px; height:132px;
   }
   .joker-card .pin{ top:-6px; left:50%; }
   @media (max-width:600px){
@@ -116,10 +118,10 @@
   /* GRAFFITI OVERLAY */
   .joker-graffiti{
     position:absolute; font-family:var(--display); color:var(--red);
-    opacity:0.35; pointer-events:none; font-weight:700; text-transform:uppercase;
+    opacity:0.4; pointer-events:none; font-weight:700; text-transform:uppercase;
   }
-  .graffiti-1{ top:120px; right:20px; font-size:28px; transform:rotate(-15deg); }
-  .graffiti-2{ bottom:40px; left:10px; font-size:20px; transform:rotate(8deg); }
+  .graffiti-1{ top:80px; right:10px; font-size:32px; transform:rotate(-12deg); }
+  .graffiti-2{ bottom:30px; left:10px; font-size:22px; transform:rotate(6deg); }
 
   /* ---------- SECTIONS ---------- */
   section{padding:52px 0;}
@@ -143,7 +145,7 @@
   .tl-item:last-child{border-bottom:none;}
   .tl-label{font-weight:600; color:var(--ink); white-space:nowrap;}
   .tl-fill{flex:1; border-bottom:1px dotted rgba(42,32,19,0.4); transform:translateY(-4px);}
-  .tl-link{font-family:var(--mono); font-size:12.5px; color:var(--red-dk); white-space:nowrap;}
+  .tl-link{font-family:var(--mono); font-size:12.5px; color:var(--red-dk); white-space:nowrap; font-weight:700;}
   .tl-link:hover{text-decoration:underline;}
 
   .arsenal-group{margin-bottom:20px;}
@@ -152,10 +154,10 @@
   .toolstamp{
     font-family:var(--mono); font-size:12px; font-weight:700; padding:6px 12px;
     border:2px solid var(--card); color:var(--card); border-radius:3px; letter-spacing:0.5px;
-    background: rgba(0,0,0,0.3);
+    background: rgba(0,0,0,0.4);
   }
 
-  /* ---------- CASE FILES with string board ---------- */
+  /* ---------- CASE FILES BOARD ---------- */
   .board{position:relative; padding-top:70px;}
   .board-pin-wrap{position:absolute; top:0; left:50%; transform:translateX(-50%); z-index:3;}
   .board-pin-wrap .pin{position:static; width:20px; height:20px;}
@@ -240,26 +242,26 @@
         <a class="btn btn-ghost" href="https://github.com/Seanfrvr" target="_blank" rel="noopener">GitHub</a>
       </div>
 
-      <!-- HEATH LEDGER JOKER CARD -->
+      <!-- PINNED JOKER PLAYING CARD -->
       <div class="joker-card" aria-hidden="true">
         <div class="pin"></div>
-        <svg viewBox="0 0 90 130" width="72" height="108">
-          <rect x="1" y="1" width="88" height="128" rx="4" fill="var(--card, #f3e9d2)" stroke="var(--ink, #2a2013)" stroke-width="2"/>
-          <text x="8" y="18" font-family="'Courier Prime', monospace" font-size="11" fill="var(--red-dk,#7e2c26)" font-weight="700">JOKER</text>
+        <svg viewBox="0 0 90 130" width="78" height="116">
+          <rect x="1" y="1" width="88" height="128" rx="4" fill="#f3e9d2" stroke="#2a2013" stroke-width="2"/>
+          <text x="8" y="18" font-family="'Courier Prime', monospace" font-size="11" fill="#7e2c26" font-weight="700">JOKER</text>
           <g transform="translate(45 64)">
             <!-- Jester Cap -->
-            <path d="M -22 -18 Q -30 -34 -14 -30 Q -8 -40 0 -30 Q 8 -40 14 -30 Q 30 -34 22 -18 Q 14 -8 0 -10 Q -14 -8 -22 -18 Z" fill="var(--ink,#2a2013)"/>
-            <circle cx="-22" cy="-19" r="2.5" fill="var(--red-dk,#7e2c26)"/>
-            <circle cx="22" cy="-19" r="2.5" fill="var(--red-dk,#7e2c26)"/>
-            <circle cx="0" cy="-31" r="2.5" fill="var(--red-dk,#7e2c26)"/>
+            <path d="M -22 -18 Q -30 -34 -14 -30 Q -8 -40 0 -30 Q 8 -40 14 -30 Q 30 -34 22 -18 Q 14 -8 0 -10 Q -14 -8 -22 -18 Z" fill="#2a2013"/>
+            <circle cx="-22" cy="-19" r="2.5" fill="#7e2c26"/>
+            <circle cx="22" cy="-19" r="2.5" fill="#7e2c26"/>
+            <circle cx="0" cy="-31" r="2.5" fill="#7e2c26"/>
             <!-- Face Accent -->
-            <ellipse cx="0" cy="4" rx="14" ry="16" fill="none" stroke="var(--ink,#2a2013)" stroke-width="2"/>
-            <circle cx="-5" cy="-1" r="3" fill="var(--ink,#2a2013)"/>
-            <circle cx="5" cy="-1" r="3" fill="var(--ink,#2a2013)"/>
-            <!-- Extended Smile -->
-            <path d="M -12 6 Q 0 16 12 6" stroke="var(--red-dk,#7e2c26)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <ellipse cx="0" cy="4" rx="14" ry="16" fill="none" stroke="#2a2013" stroke-width="2"/>
+            <circle cx="-5" cy="-1" r="3" fill="#2a2013"/>
+            <circle cx="5" cy="-1" r="3" fill="#2a2013"/>
+            <!-- Dark Knight Smile -->
+            <path d="M -14 6 Q 0 18 14 6" stroke="#7e2c26" stroke-width="3" fill="none" stroke-linecap="round"/>
           </g>
-          <text x="8" y="120" font-family="'Courier Prime', monospace" font-size="11" fill="var(--red-dk,#7e2c26)" font-weight="700">JOKER</text>
+          <text x="8" y="120" font-family="'Courier Prime', monospace" font-size="11" fill="#7e2c26" font-weight="700">JOKER</text>
         </svg>
       </div>
     </div>
