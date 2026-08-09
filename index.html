@@ -186,6 +186,248 @@ footer{padding:20px 0 70px}
  .tl-item{display:grid;grid-template-columns:1fr auto}.tl-fill{display:none}.tl-link{grid-column:1/-1;white-space:normal}
 }
 @media(max-width:460px){.night-btn{font-size:9px}.brand{font-size:13px}}
+
+  /* ---------- EXPANDABLE DOSSIER 01 ---------- */
+  .case-folder.primary-dossier{
+    cursor:default;
+  }
+  .case-folder.primary-dossier .case-title a{
+    display:inline-block;
+  }
+  .dossier-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:9px;
+    align-items:center;
+    margin-top:16px;
+  }
+  .dossier-link,
+  .dossier-toggle{
+    font-family:var(--mono);
+    font-size:11.5px;
+    font-weight:700;
+    letter-spacing:.25px;
+    border:0;
+    background:transparent;
+    padding:0;
+    color:var(--red-dk);
+    cursor:pointer;
+  }
+  .dossier-link:hover,
+  .dossier-toggle:hover{
+    text-decoration:underline;
+  }
+  .dossier-toggle{
+    color:var(--ink-soft);
+  }
+  .dossier-count{
+    margin-top:12px;
+    font-family:var(--mono);
+    font-size:10.5px;
+    font-weight:700;
+    color:var(--ink-soft);
+    letter-spacing:.45px;
+  }
+
+  .investigation-branch{
+    position:relative;
+    z-index:2;
+    max-height:0;
+    opacity:0;
+    overflow:hidden;
+    transform:translateY(-10px);
+    transition:max-height .7s ease, opacity .35s ease, transform .45s ease, margin-top .45s ease;
+    margin-top:0;
+  }
+  .investigation-branch.open{
+    max-height:900px;
+    opacity:1;
+    transform:translateY(0);
+    margin-top:54px;
+    overflow:visible;
+  }
+
+  .branch-heading{
+    text-align:center;
+    font-family:var(--mono);
+    color:var(--card-dk);
+    font-size:10.5px;
+    font-weight:700;
+    letter-spacing:1px;
+    margin-bottom:28px;
+    text-transform:uppercase;
+  }
+
+  .child-files{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:18px;
+    position:relative;
+    z-index:3;
+  }
+
+  .child-file{
+    position:relative;
+    background:var(--card);
+    border-radius:2px;
+    padding:22px 18px 18px;
+    box-shadow:0 9px 19px rgba(0,0,0,.31);
+    min-height:250px;
+  }
+  .child-file:nth-child(1){transform:rotate(-1.1deg);}
+  .child-file:nth-child(2){transform:rotate(.7deg);}
+  .child-file:nth-child(3){transform:rotate(-.4deg);}
+  .child-file .pin{top:-8px;}
+  .child-id{
+    font-family:var(--mono);
+    font-size:10.5px;
+    font-weight:700;
+    color:var(--red-dk);
+    margin-bottom:8px;
+  }
+  .child-title{
+    font-family:var(--display);
+    font-size:16.5px;
+    line-height:1.28;
+    margin-bottom:10px;
+    color:var(--ink);
+  }
+  .child-desc{
+    font-size:12.5px;
+    line-height:1.55;
+    color:var(--ink-soft);
+    margin-bottom:12px;
+  }
+  .child-tags{
+    display:flex;
+    gap:5px;
+    flex-wrap:wrap;
+    margin:12px 0 15px;
+  }
+  .child-tag{
+    font-family:var(--mono);
+    font-size:9.5px;
+    padding:2px 6px;
+    border:1px solid var(--ink-soft);
+    color:var(--ink-soft);
+    border-radius:2px;
+  }
+  .child-link{
+    font-family:var(--mono);
+    font-size:11px;
+    font-weight:700;
+    color:var(--red-dk);
+  }
+  .child-link:hover{text-decoration:underline;}
+
+  svg.child-strings{
+    position:absolute;
+    left:0;
+    top:-54px;
+    width:100%;
+    height:100%;
+    overflow:visible;
+    pointer-events:none;
+    z-index:1;
+  }
+  svg.child-strings path{
+    fill:none;
+    stroke:var(--red);
+    stroke-width:1.8;
+    opacity:.82;
+    stroke-dasharray:700;
+    stroke-dashoffset:700;
+    transition:stroke-dashoffset .9s ease;
+  }
+  svg.child-strings path.drawn{
+    stroke-dashoffset:0;
+  }
+  .branch-origin{
+    position:absolute;
+    width:18px;
+    height:18px;
+    border-radius:50%;
+    left:50%;
+    top:-62px;
+    transform:translateX(-50%);
+    background:radial-gradient(circle at 35% 30%,#e8746b,var(--red-dk) 70%);
+    box-shadow:0 3px 4px rgba(0,0,0,.42), inset 0 1px 1px rgba(255,255,255,.35);
+    z-index:4;
+  }
+
+  @media(max-width:760px){
+    .investigation-branch.open{
+      margin-top:34px;
+    }
+    .child-files{
+      grid-template-columns:1fr;
+      gap:20px;
+    }
+    svg.child-strings,
+    .branch-origin{
+      display:none;
+    }
+    .child-file{
+      transform:none !important;
+      border-left:3px solid var(--red);
+    }
+  }
+
+
+  /* ---------- DOSSIER STATUS STAMPS ---------- */
+  .case-folder{
+    padding-top:30px;
+  }
+  .case-folder .case-num{
+    padding-right:96px;
+    margin-bottom:11px;
+  }
+  .case-folder .case-title{
+    padding-right:84px;
+  }
+  .case-status{
+    position:absolute;
+    top:14px;
+    right:15px;
+    z-index:6;
+    min-width:68px;
+    padding:4px 9px 3px;
+    text-align:center;
+    font-family:var(--mono);
+    font-size:10.5px;
+    line-height:1;
+    font-weight:700;
+    letter-spacing:1.2px;
+    text-transform:uppercase;
+    background:rgba(243,233,210,.82);
+    border:2px solid currentColor;
+    border-radius:2px;
+    box-shadow:0 1px 0 rgba(0,0,0,.08);
+    pointer-events:none;
+  }
+  .case-status.closed{
+    color:var(--stamp);
+    transform:rotate(5deg);
+  }
+  .case-status.active{
+    color:var(--red-dk);
+    transform:rotate(-4deg);
+  }
+
+  @media(max-width:520px){
+    .case-folder .case-num,
+    .case-folder .case-title{
+      padding-right:74px;
+    }
+    .case-status{
+      top:12px;
+      right:12px;
+      min-width:60px;
+      font-size:9.5px;
+      padding:4px 7px 3px;
+    }
+  }
+
 </style>
 </head>
 <body>
@@ -210,7 +452,7 @@ footer{padding:20px 0 70px}
       <div class="stamp-tag"><span class="dot"></span> ACTIVE FILE</div>
       <h1>Sean</h1>
       <div class="role">Cloud &amp; Cyber Security Analyst</div>
-      <p class="lede">Security analyst building hands-on investigations around threat hunting, SIEM telemetry and detection engineering — with the evidence, reasoning and failures documented instead of hidden.</p>
+      <p class="lede">Security analyst with hands on experience in investigations involving threat hunting, SIEM telemetry and detection engineering, with the evidence, reasoning and full process documented throughout.</p>
       <div class="typed-line"><span>HANDLE:</span> <b>Seanfrvr</b></div>
       <div class="typed-line"><span>CURRENT FILE:</span> <b>Detection Engineering &amp; Response HL</b></div>
       <div class="cta-row">
@@ -244,7 +486,7 @@ footer{padding:20px 0 70px}
   <div class="wrap">
     <div class="section-head"><span class="idx">01</span><h2>Focus</h2></div>
     <div class="index-card">
-      <p style="color:var(--ink-soft);font-size:14.5px">Threat hunting and detection engineering through real lab telemetry. The portfolio is intentionally small: two projects, both documented like investigations rather than a wall of generic project cards.</p>
+      <p style="color:var(--ink-soft);font-size:14.5px">Threat hunting and detection engineering through real lab telemetry. The portfolio directly showcases projects I built myself and documented as investigations rather than a wall of generic project cards.</p>
     </div>
   </div>
 </section>
@@ -267,7 +509,7 @@ footer{padding:20px 0 70px}
 
     <div class="arsenal-group">
       <h3>Investigation &amp; SIEM</h3>
-      <div class="stamps"><span class="toolstamp">SPLUNK</span><span class="toolstamp">WAZUH</span><span class="toolstamp">SPL</span><span class="toolstamp">SYSMON</span></div>
+      <div class="stamps"><span class="toolstamp">SPLUNK</span><span class="toolstamp">WAZUH</span><span class="toolstamp">SYSMON</span></div>
     </div>
     <div class="arsenal-group">
       <h3>Detection &amp; Response</h3>
@@ -276,47 +518,139 @@ footer{padding:20px 0 70px}
   </div>
 </section>
 
+
 <section id="cases">
   <div class="wrap">
     <div class="section-head"><span class="idx">03</span><h2>Case Files</h2></div>
-    <p class="section-sub">Two dossiers only. One closed investigation. One live file still being built.</p>
+    <p class="section-sub">
+      Two dossiers only. One completed threat-hunting project with three attached investigations,
+      and one live detection engineering file still being built.
+    </p>
 
     <div class="board" id="board">
       <div class="board-pin-wrap"><div class="pin"></div></div>
       <svg class="strings" id="strings"></svg>
 
       <div class="cases-row">
-        <article class="case-folder" data-case>
+        <div class="case-folder primary-dossier" data-case id="dossier-one">
           <div class="pin"></div>
-          <div class="stamp-status">CLOSED</div>
+          <div class="case-status closed">CLOSED</div>
           <div class="case-num">DOSSIER 01</div>
-          <div class="case-title">Threat Hunting with Splunk Home Lab</div>
-          <div class="case-desc">A Splunk threat-hunting lab using the BOTSv3 dataset, with SPL-driven investigations and documented MITRE ATT&amp;CK mapping.</div>
-          <div class="evidence-lines">
-            <div><b>EVIDENCE:</b> SPL queries / event pivots / documented findings</div>
-            <div><b>HUNTS:</b> PowerShell / SSH brute force / cloud activity</div>
-          </div>
-          <div class="mitre-tags"><span class="mitre-tag">SPLUNK</span><span class="mitre-tag">SPL</span><span class="mitre-tag">MITRE ATT&amp;CK</span></div>
-          <a class="open-file" href="https://github.com/Seanfrvr/Threat-hunting-with-splunk-HL" target="_blank" rel="noopener">OPEN PUBLIC FILE →</a>
-        </article>
 
-        <article class="case-folder" data-case>
+          <div class="case-title">
+            <a href="https://github.com/Seanfrvr/Threat-hunting-with-splunk-HL" target="_blank" rel="noopener">
+              Threat Hunting with Splunk Home Lab
+            </a>
+          </div>
+
+          <div class="case-desc">
+            Splunk threat-hunting home lab built around the BOTSv3 dataset. I investigated multiple
+            attack scenarios using SPL, event correlation and MITRE ATT&amp;CK mapping, documenting
+            each hunt from initial hypothesis through final findings.
+          </div>
+
+          <div class="mitre-tags">
+            <span class="mitre-tag">SPLUNK</span>
+            <span class="mitre-tag">BOTSv3</span>
+            <span class="mitre-tag">MITRE ATT&amp;CK</span>
+          </div>
+
+          <div class="dossier-count">3 INVESTIGATIONS ATTACHED</div>
+
+          <div class="dossier-actions">
+            <a class="dossier-link" href="https://github.com/Seanfrvr/Threat-hunting-with-splunk-HL" target="_blank" rel="noopener">
+              OPEN PROJECT OVERVIEW →
+            </a>
+            <button class="dossier-toggle" id="investigationToggle" type="button" aria-expanded="false" aria-controls="investigationBranch">
+              EXPAND INVESTIGATIONS ↓
+            </button>
+          </div>
+        </div>
+
+        <div class="case-folder" data-case>
           <div class="pin"></div>
-          <div class="stamp-status active">ACTIVE</div>
+          <div class="case-status active">ACTIVE</div>
           <div class="case-num">DOSSIER 02</div>
           <div class="case-title">Detection Engineering &amp; Response HL</div>
-          <div class="case-desc">Live SOC lab generating real endpoint telemetry and following the chain from adversary emulation to detection, enrichment and response.</div>
-          <div class="evidence-lines">
-            <div><b>STACK:</b> Wazuh / Sysmon / Shuffle / VirusTotal</div>
-            <div><b>WORK:</b> attack simulation / telemetry hunting / detection gaps / response</div>
+          <div class="case-desc">
+            Live SOC lab generating real endpoint telemetry and following the chain from adversary
+            emulation to detection, enrichment and response.
           </div>
-          <div class="mitre-tags"><span class="mitre-tag">WAZUH</span><span class="mitre-tag">ATOMIC RED TEAM</span><span class="mitre-tag">SOAR</span></div>
-          <span class="private-note">PRIVATE FILE — INVESTIGATION IN PROGRESS</span>
-        </article>
+          <div class="mitre-tags">
+            <span class="mitre-tag">WAZUH</span>
+            <span class="mitre-tag">SYSMON</span>
+            <span class="mitre-tag">ATOMIC RED TEAM</span>
+            <span class="mitre-tag">SOAR</span>
+          </div>
+          <span class="open-file" style="cursor:default;text-decoration:none;">PRIVATE FILE — INVESTIGATION IN PROGRESS</span>
+        </div>
+      </div>
+
+      <div class="investigation-branch" id="investigationBranch">
+        <div class="branch-origin" id="branchOrigin"></div>
+        <svg class="child-strings" id="childStrings"></svg>
+        <div class="branch-heading">Attached evidence files / Dossier 01</div>
+
+        <div class="child-files">
+          <article class="child-file" data-child>
+            <div class="pin"></div>
+            <div class="child-id">FILE 01</div>
+            <div class="child-title">Encoded PowerShell Execution</div>
+            <div class="child-desc">
+              Obfuscated PowerShell download cradle investigated in Splunk and decoded to recover the underlying behavior.
+            </div>
+            <div class="child-tags">
+              <span class="child-tag">T1059.001</span>
+              <span class="child-tag">T1140</span>
+            </div>
+            <a class="child-link"
+               href="https://github.com/Seanfrvr/Threat-hunting-with-splunk-HL/blob/main/scenarios/scenario-1-powershell.md"
+               target="_blank" rel="noopener">
+              OPEN INVESTIGATION →
+            </a>
+          </article>
+
+          <article class="child-file" data-child>
+            <div class="pin"></div>
+            <div class="child-id">FILE 02</div>
+            <div class="child-title">Linux SSH Brute Force</div>
+            <div class="child-desc">
+              Password-spray activity investigated across multiple source IPs, with the final hunt confirming the attempt was unsuccessful.
+            </div>
+            <div class="child-tags">
+              <span class="child-tag">T1110.001</span>
+              <span class="child-tag">T1087</span>
+            </div>
+            <a class="child-link"
+               href="https://github.com/Seanfrvr/Threat-hunting-with-splunk-HL/blob/main/scenarios/scenario-2-ssh-bruteforce.md"
+               target="_blank" rel="noopener">
+              OPEN INVESTIGATION →
+            </a>
+          </article>
+
+          <article class="child-file" data-child>
+            <div class="pin"></div>
+            <div class="child-id">FILE 03</div>
+            <div class="child-title">AWS CloudTrail — S3 Exposure</div>
+            <div class="child-desc">
+              Compromised IAM activity and S3 exposure investigated through CloudTrail evidence, with no confirmed data exfiltration.
+            </div>
+            <div class="child-tags">
+              <span class="child-tag">T1078</span>
+              <span class="child-tag">T1530</span>
+            </div>
+            <a class="child-link"
+               href="https://github.com/Seanfrvr/Threat-hunting-with-splunk-HL/blob/main/scenarios/scenario-3-aws-cloudtrail.md"
+               target="_blank" rel="noopener">
+              OPEN INVESTIGATION →
+            </a>
+          </article>
+        </div>
       </div>
     </div>
   </div>
 </section>
+
 
 <footer id="contact">
   <div class="wrap">
@@ -332,43 +666,138 @@ footer{padding:20px 0 70px}
   </div>
 </footer>
 
+
 <script>
 (function(){
- const body=document.body;
- const nightBtn=document.getElementById('nightBtn');
- const joker=document.getElementById('jokerCard');
- nightBtn.addEventListener('click',()=>{
-   body.classList.toggle('night');
-   const on=body.classList.contains('night');
-   nightBtn.setAttribute('aria-pressed',on?'true':'false');
-   nightBtn.textContent=on?'☀ DAY FILE':'☾ NIGHT SHIFT';
- });
- function jokerToggle(){ body.classList.toggle('joker-open'); }
- joker.addEventListener('click',jokerToggle);
- joker.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();jokerToggle();}});
+  var nightBtn = document.getElementById('nightBtn');
+  var jokerCard = document.getElementById('jokerCard');
 
- const board=document.getElementById('board');
- const svg=document.getElementById('strings');
- const pinWrap=document.querySelector('.board-pin-wrap .pin');
- const cases=document.querySelectorAll('[data-case]');
- const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
- function drawStrings(){
-   if(innerWidth<=760){svg.innerHTML='';return;}
-   const br=board.getBoundingClientRect(), pr=pinWrap.getBoundingClientRect();
-   const sx=pr.left+pr.width/2-br.left, sy=pr.top+pr.height/2-br.top;
-   svg.setAttribute('width',br.width);svg.setAttribute('height',br.height);svg.innerHTML='';
-   cases.forEach((el,i)=>{
-     const r=el.querySelector('.pin').getBoundingClientRect();
-     const ex=r.left+r.width/2-br.left, ey=r.top+r.height/2-br.top;
-     const path=document.createElementNS('http://www.w3.org/2000/svg','path');
-     path.setAttribute('d','M '+sx+' '+sy+' Q '+((sx+ex)/2)+' '+((sy+ey)/2-22)+' '+ex+' '+ey);
-     svg.appendChild(path);
-     setTimeout(()=>path.classList.add('drawn'),reduceMotion?0:140+i*180);
-   });
- }
- addEventListener('load',drawStrings);
- addEventListener('resize',()=>{clearTimeout(window.__r);window.__r=setTimeout(drawStrings,120)});
+  if (nightBtn) {
+    nightBtn.addEventListener('click', function(){
+      document.body.classList.toggle('night');
+      var isNight = document.body.classList.contains('night');
+      nightBtn.setAttribute('aria-pressed', isNight ? 'true' : 'false');
+      nightBtn.textContent = isNight ? '☀ DAY FILE' : '☾ NIGHT SHIFT';
+    });
+  }
+
+  function toggleJokerClue(){
+    document.body.classList.toggle('joker-open');
+  }
+
+  if (jokerCard) {
+    jokerCard.addEventListener('click', toggleJokerClue);
+    jokerCard.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleJokerClue();
+      }
+    });
+  }
+
+  var board = document.getElementById('board');
+  var svg = document.getElementById('strings');
+  var pinWrap = document.querySelector('.board-pin-wrap .pin');
+  var cases = document.querySelectorAll('[data-case]');
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function drawStrings(){
+    if (window.innerWidth <= 760) { svg.innerHTML = ''; return; }
+    var boardRect = board.getBoundingClientRect();
+    var pinRect = pinWrap.getBoundingClientRect();
+    var startX = pinRect.left + pinRect.width/2 - boardRect.left;
+    var startY = pinRect.top + pinRect.height/2 - boardRect.top;
+
+    svg.setAttribute('width', boardRect.width);
+    svg.setAttribute('height', boardRect.height);
+    svg.innerHTML = '';
+
+    cases.forEach(function(el, i){
+      var pin = el.querySelector('.pin');
+      var r = pin.getBoundingClientRect();
+      var endX = r.left + r.width/2 - boardRect.left;
+      var endY = r.top + r.height/2 - boardRect.top;
+      var midY = (startY + endY) / 2;
+
+      var path = document.createElementNS('http://www.w3.org/2000/svg','path');
+      var d = 'M ' + startX + ' ' + startY +
+              ' Q ' + ((startX+endX)/2) + ' ' + (midY - 18) +
+              ' ' + endX + ' ' + endY;
+      path.setAttribute('d', d);
+      svg.appendChild(path);
+
+      setTimeout(function(){
+        path.classList.add('drawn');
+      }, reduceMotion ? 0 : 150 + i*180);
+    });
+  }
+
+  var toggle = document.getElementById('investigationToggle');
+  var branch = document.getElementById('investigationBranch');
+  var childSvg = document.getElementById('childStrings');
+  var origin = document.getElementById('branchOrigin');
+  var children = document.querySelectorAll('[data-child]');
+
+  function drawChildStrings(){
+    if (!branch.classList.contains('open') || window.innerWidth <= 760) {
+      childSvg.innerHTML = '';
+      return;
+    }
+
+    var branchRect = branch.getBoundingClientRect();
+    var originRect = origin.getBoundingClientRect();
+    var startX = originRect.left + originRect.width/2 - branchRect.left;
+    var startY = originRect.top + originRect.height/2 - branchRect.top;
+
+    childSvg.setAttribute('width', branchRect.width);
+    childSvg.setAttribute('height', branchRect.height + 70);
+    childSvg.innerHTML = '';
+
+    children.forEach(function(el, i){
+      var p = el.querySelector('.pin');
+      var r = p.getBoundingClientRect();
+      var endX = r.left + r.width/2 - branchRect.left;
+      var endY = r.top + r.height/2 - branchRect.top + 54;
+
+      var path = document.createElementNS('http://www.w3.org/2000/svg','path');
+      var bendY = (startY + endY) / 2 - 12;
+      var d = 'M ' + startX + ' ' + startY +
+              ' Q ' + ((startX+endX)/2) + ' ' + bendY +
+              ' ' + endX + ' ' + endY;
+      path.setAttribute('d', d);
+      childSvg.appendChild(path);
+
+      setTimeout(function(){
+        path.classList.add('drawn');
+      }, reduceMotion ? 0 : 90 + i*150);
+    });
+  }
+
+  toggle.addEventListener('click', function(){
+    var open = branch.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    toggle.textContent = open ? 'HIDE INVESTIGATIONS ↑' : 'EXPAND INVESTIGATIONS ↓';
+
+    if (open) {
+      setTimeout(function(){
+        drawChildStrings();
+        branch.scrollIntoView({behavior: reduceMotion ? 'auto' : 'smooth', block:'nearest'});
+      }, 470);
+    } else {
+      childSvg.innerHTML = '';
+    }
+  });
+
+  window.addEventListener('load', drawStrings);
+  window.addEventListener('resize', function(){
+    clearTimeout(window._rt);
+    window._rt = setTimeout(function(){
+      drawStrings();
+      drawChildStrings();
+    }, 150);
+  });
 })();
 </script>
+
 </body>
 </html>
