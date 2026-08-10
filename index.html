@@ -4,430 +4,68 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#6f5132">
-<title>Sean — Cloud & Cyber Security Analyst</title>
-<meta name="description" content="Sean — Cloud & Cyber Security Analyst. Threat hunting and detection engineering case files.">
+<title>Sean — Threat Hunter | Detection Engineer</title>
+<meta name="description" content="Sean — Threat Hunter and Detection Engineer. Blue team investigations, detection engineering, threat hunting, SIEM telemetry and SOC response case files.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Courier+Prime:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --cork:#8a6a45; --cork-dk:#5f4529; --cork-lt:#a1825a;
-  --card:#f3e9d2; --card-dk:#e4d3ac;
-  --ink:#2a2013; --ink-soft:#5b4a34;
-  --red:#a53b32; --red-dk:#7e2c26;
-  --amber:#c98a3a; --stamp:#3f6b45;
+  --cork:#8a6a45;--cork-dk:#5f4529;--cork-lt:#a1825a;
+  --card:#f3e9d2;--card-dk:#e4d3ac;
+  --ink:#2a2013;--ink-soft:#5b4a34;
+  --red:#a53b32;--red-dk:#7e2c26;--stamp:#3f6b45;
   --display:'Special Elite',cursive;
   --mono:'Courier Prime',ui-monospace,monospace;
-  --sans:'Inter',-apple-system,sans-serif;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
-  font-family:var(--sans); color:var(--ink); line-height:1.6;
-  background-color:var(--cork);
-  background-image:
-    radial-gradient(circle at 20% 15%,rgba(255,255,255,.05),transparent 40%),
-    radial-gradient(circle at 80% 70%,rgba(0,0,0,.12),transparent 45%),
-    repeating-radial-gradient(circle at 50% 50%,rgba(0,0,0,.035) 0,rgba(0,0,0,.035) 1px,transparent 1px,transparent 3px);
-  background-attachment:fixed;
-  transition:background-color .55s ease,color .4s ease;
-  -webkit-font-smoothing:antialiased;
+  font-family:var(--sans);color:var(--ink);line-height:1.6;background-color:var(--cork);
+  background-image:radial-gradient(circle at 20% 15%,rgba(255,255,255,.05),transparent 40%),radial-gradient(circle at 80% 70%,rgba(0,0,0,.12),transparent 45%),repeating-radial-gradient(circle at 50% 50%,rgba(0,0,0,.035) 0,rgba(0,0,0,.035) 1px,transparent 1px,transparent 3px);
+  background-attachment:fixed;transition:background-color .55s ease,color .4s ease;-webkit-font-smoothing:antialiased;
 }
-body:before{
-  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
-  background:radial-gradient(ellipse at center,transparent 42%,rgba(0,0,0,.55) 100%);
-}
-body:after{
-  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;
-  mix-blend-mode:overlay;
-  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-}
-a{color:inherit;text-decoration:none}
-button{font:inherit}
-.wrap{max-width:920px;margin:auto;padding:0 24px;position:relative;z-index:2}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse at center,transparent 42%,rgba(0,0,0,.55) 100%)}
+body:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>")}
+a{color:inherit;text-decoration:none}button{font:inherit}.wrap{max-width:940px;margin:auto;padding:0 24px;position:relative;z-index:2}
 
-/* DARK KNIGHT / NIGHT SHIFT — intentionally keeps the detective identity */
 body.night{--cork:#32271c;--cork-dk:#17120e;--cork-lt:#59442f;--card:#dfd1b6;--card-dk:#bba98a}
-.rain{
-  opacity:0;position:fixed;inset:0;z-index:1;pointer-events:none;
-  background-image:repeating-linear-gradient(112deg,transparent 0 13px,rgba(218,225,221,.09) 14px,transparent 15px 27px);
-  background-size:100% 150px;animation:rain 1.1s linear infinite;transition:opacity .5s ease
-}
-body.night .rain{opacity:.25}
-@keyframes rain{from{background-position:0 -150px}to{background-position:-35px 150px}}
+.rain{opacity:0;position:fixed;inset:0;z-index:1;pointer-events:none;background-image:repeating-linear-gradient(112deg,transparent 0 13px,rgba(218,225,221,.09) 14px,transparent 15px 27px);background-size:100% 150px;animation:rain 1.1s linear infinite;transition:opacity .5s ease}
+body.night .rain{opacity:.25}@keyframes rain{from{background-position:0 -150px}to{background-position:-35px 150px}}
 
-nav{
- position:sticky;top:0;z-index:30;background:rgba(58,42,25,.84);
- backdrop-filter:blur(7px);border-bottom:2px solid var(--cork-dk)
-}
+nav{position:sticky;top:0;z-index:30;background:rgba(58,42,25,.84);backdrop-filter:blur(7px);border-bottom:2px solid var(--cork-dk)}
 body.night nav{background:rgba(17,14,11,.88)}
-nav .wrap{height:56px;display:flex;align-items:center;justify-content:space-between;gap:14px}
-.brand{font-family:var(--display);font-size:15px;color:var(--card)}
-.navright{display:flex;align-items:center;gap:18px}
-.navlinks{display:flex;gap:20px;font-family:var(--mono);font-size:12px;color:var(--card-dk);font-weight:700}
-.navlinks a:hover{color:white}
-.night-btn{
-  border:1px solid rgba(243,233,210,.42);color:var(--card);background:rgba(25,20,15,.32);
-  padding:6px 9px;border-radius:2px;cursor:pointer;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.5px
-}
-.night-btn:hover{background:rgba(0,0,0,.25)}
+nav .wrap{height:56px;display:flex;align-items:center;justify-content:space-between;gap:14px}.brand{font-family:var(--display);font-size:15px;color:var(--card)}
+.navright{display:flex;align-items:center;gap:18px}.navlinks{display:flex;gap:20px;font-family:var(--mono);font-size:12px;color:var(--card-dk);font-weight:700}.navlinks a:hover{color:white}
+.night-btn{border:1px solid rgba(243,233,210,.42);color:var(--card);background:rgba(25,20,15,.32);padding:6px 9px;border-radius:2px;cursor:pointer;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.5px}.night-btn:hover{background:rgba(0,0,0,.25)}
 
-.pin{
- width:16px;height:16px;border-radius:50%;
- background:radial-gradient(circle at 35% 30%,#e8746b,var(--red-dk) 70%);
- box-shadow:0 3px 4px rgba(0,0,0,.45),inset 0 1px 1px rgba(255,255,255,.4);
- position:absolute;left:50%;transform:translateX(-50%)
-}
-header{padding:72px 0 38px}
-.folder{
- position:relative;background:var(--card);box-shadow:0 14px 30px rgba(0,0,0,.35),0 2px 0 rgba(0,0,0,.15);
- border-radius:2px;padding:44px 40px 36px;transform:rotate(-.6deg);max-width:650px;margin:auto;
- transition:background .45s ease,transform .25s ease
-}
-.folder:after,.index-card:after,.case-folder:after{
- content:"";position:absolute;inset:0;pointer-events:none;
- background-image:repeating-radial-gradient(circle at 30% 20%,rgba(0,0,0,.02) 0,rgba(0,0,0,.02) 1px,transparent 1px,transparent 3px)
-}
-.tape{position:absolute;width:70px;height:26px;background:rgba(255,255,255,.35);border:1px solid rgba(0,0,0,.05);box-shadow:0 2px 4px rgba(0,0,0,.15)}
-.tape.tl{top:-14px;left:36px;transform:rotate(-8deg)} .tape.tr{top:-12px;right:30px;transform:rotate(6deg)}
-.stamp-tag{
- display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:1px;
- color:var(--stamp);border:2px solid var(--stamp);border-radius:3px;padding:4px 10px;text-transform:uppercase;
- transform:rotate(-2deg);margin-bottom:18px
-}
-.stamp-tag .dot{width:6px;height:6px;border-radius:50%;background:var(--stamp)}
-h1{font-family:var(--display);font-size:clamp(34px,6vw,52px);line-height:1.05;color:var(--ink);margin-bottom:6px}
-.role{font-family:var(--mono);font-size:14px;font-weight:700;color:var(--red-dk);letter-spacing:.5px;margin-bottom:20px}
-.lede{color:var(--ink-soft);font-size:15.5px;max-width:56ch;margin-bottom:24px}
-.typed-line{display:flex;gap:6px;font-family:var(--mono);font-size:12px;color:var(--ink-soft);margin-bottom:6px}
-.typed-line b{color:var(--ink)}
-.cta-row{display:flex;gap:10px;margin-top:26px;flex-wrap:wrap}
-.btn{font-family:var(--mono);font-size:12.5px;font-weight:700;padding:10px 18px;border-radius:2px;border:2px solid var(--ink);transition:.15s}
-.btn-primary{background:var(--ink);color:var(--card)} .btn-primary:hover{background:var(--red-dk);border-color:var(--red-dk)}
-.btn-ghost:hover{background:var(--ink);color:var(--card)}
+.pin{width:16px;height:16px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#e8746b,var(--red-dk) 70%);box-shadow:0 3px 4px rgba(0,0,0,.45),inset 0 1px 1px rgba(255,255,255,.4);position:absolute;left:50%;transform:translateX(-50%)}
+header{padding:72px 0 38px}.folder{position:relative;background:var(--card);box-shadow:0 14px 30px rgba(0,0,0,.35),0 2px 0 rgba(0,0,0,.15);border-radius:2px;padding:44px 40px 36px;transform:rotate(-.6deg);max-width:680px;margin:auto;transition:background .45s ease,transform .25s ease}
+.folder:after,.index-card:after,.case-folder:after,.branch-file:after{content:"";position:absolute;inset:0;pointer-events:none;background-image:repeating-radial-gradient(circle at 30% 20%,rgba(0,0,0,.02) 0,rgba(0,0,0,.02) 1px,transparent 1px,transparent 3px)}
+.tape{position:absolute;width:70px;height:26px;background:rgba(255,255,255,.35);border:1px solid rgba(0,0,0,.05);box-shadow:0 2px 4px rgba(0,0,0,.15)}.tape.tl{top:-14px;left:36px;transform:rotate(-8deg)}.tape.tr{top:-12px;right:30px;transform:rotate(6deg)}
+.stamp-tag{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:1px;color:var(--stamp);border:2px solid var(--stamp);border-radius:3px;padding:4px 10px;text-transform:uppercase;transform:rotate(-2deg);margin-bottom:18px}.stamp-tag .dot{width:6px;height:6px;border-radius:50%;background:var(--stamp)}
+h1{font-family:var(--display);font-size:clamp(34px,6vw,52px);line-height:1.05;color:var(--ink);margin-bottom:6px}.role{font-family:var(--mono);font-size:14px;font-weight:700;color:var(--red-dk);letter-spacing:.5px;margin-bottom:6px}.support-role{font-family:var(--mono);font-size:11px;color:var(--ink-soft);font-weight:700;letter-spacing:.7px;margin-bottom:20px;text-transform:uppercase}.lede{color:var(--ink-soft);font-size:15.5px;max-width:58ch;margin-bottom:24px}.typed-line{display:flex;gap:6px;font-family:var(--mono);font-size:12px;color:var(--ink-soft);margin-bottom:6px}.typed-line b{color:var(--ink)}
+.cta-row{display:flex;gap:10px;margin-top:26px;flex-wrap:wrap}.btn{font-family:var(--mono);font-size:12.5px;font-weight:700;padding:10px 18px;border-radius:2px;border:2px solid var(--ink);transition:.15s}.btn-primary{background:var(--ink);color:var(--card)}.btn-primary:hover{background:var(--red-dk);border-color:var(--red-dk)}.btn-ghost:hover{background:var(--ink);color:var(--card)}
 
-/* Joker card keeps the original handmade clue-board vibe */
-.joker-card{
- position:absolute;width:98px;height:140px;right:-22px;bottom:-24px;z-index:5;transform:rotate(9deg);
- filter:drop-shadow(0 8px 14px rgba(0,0,0,.45));cursor:pointer;transition:transform .25s ease
-}
-.joker-card:hover{transform:rotate(4deg) scale(1.06)}
-.joker-card .pin{top:-7px}
-.joker-note{
- position:absolute;right:16px;bottom:40px;opacity:0;transform:rotate(-7deg) translateY(6px);
- font-family:var(--display);font-size:16px;color:var(--red-dk);transition:.3s;pointer-events:none;z-index:4
-}
-body.joker-open .joker-note{opacity:.92;transform:rotate(-7deg) translateY(0)}
-body.joker-open .folder{transform:rotate(-.9deg) scale(1.006)}
-body.joker-open:before{background:radial-gradient(ellipse at center,transparent 28%,rgba(0,0,0,.7) 100%)}
+.joker-card{position:absolute;width:98px;height:140px;right:-22px;bottom:-24px;z-index:5;transform:rotate(9deg);filter:drop-shadow(0 8px 14px rgba(0,0,0,.45));cursor:pointer;transition:transform .25s ease}.joker-card:hover{transform:rotate(4deg) scale(1.06)}.joker-card .pin{top:-7px}.joker-note{position:absolute;right:16px;bottom:40px;opacity:0;transform:rotate(-7deg) translateY(6px);font-family:var(--display);font-size:16px;color:var(--red-dk);transition:.3s;pointer-events:none;z-index:4}body.joker-open .joker-note{opacity:.92;transform:rotate(-7deg) translateY(0)}body.joker-open .folder{transform:rotate(-.9deg) scale(1.006)}body.joker-open:before{background:radial-gradient(ellipse at center,transparent 28%,rgba(0,0,0,.7) 100%)}
 
-section{padding:48px 0}
-.section-head{display:flex;align-items:baseline;gap:10px;margin-bottom:22px}
-.section-head .idx{font-family:var(--mono);color:var(--card);background:var(--ink);padding:2px 8px;border-radius:2px;font-size:12px;font-weight:700}
-.section-head h2{font-family:var(--display);font-size:24px;color:var(--card)}
-.section-sub{color:var(--card-dk);font-size:14.5px;max-width:66ch;margin-bottom:26px}
-.index-card{
- background:var(--card);border-radius:2px;box-shadow:0 8px 18px rgba(0,0,0,.3);
- padding:30px 32px;position:relative;transform:rotate(.35deg)
-}
+section{padding:48px 0}.section-head{display:flex;align-items:baseline;gap:10px;margin-bottom:22px}.section-head .idx{font-family:var(--mono);color:var(--card);background:var(--ink);padding:2px 8px;border-radius:2px;font-size:12px;font-weight:700}.section-head h2{font-family:var(--display);font-size:24px;color:var(--card)}.section-sub{color:var(--card-dk);font-size:14.5px;max-width:70ch;margin-bottom:26px}.index-card{background:var(--card);border-radius:2px;box-shadow:0 8px 18px rgba(0,0,0,.3);padding:30px 32px;position:relative;transform:rotate(.35deg)}
+.tl-list{list-style:none}.tl-item{display:flex;align-items:baseline;gap:8px;padding:12px 0;border-bottom:1px dashed rgba(42,32,19,.25);font-size:14px}.tl-item:last-child{border-bottom:none}.tl-label{font-weight:600;white-space:nowrap}.tl-fill{flex:1;border-bottom:1px dotted rgba(42,32,19,.4);transform:translateY(-4px)}.tl-link{font-family:var(--mono);font-size:12px;color:var(--red-dk);white-space:nowrap;font-weight:700}.tl-link:hover{text-decoration:underline}
+.arsenal-group{margin:20px 0}.arsenal-group h3{font-family:var(--mono);font-size:11px;color:var(--card-dk);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}.stamps{display:flex;flex-wrap:wrap;gap:9px}.toolstamp{font-family:var(--mono);font-size:12px;font-weight:700;padding:6px 11px;border:2px solid var(--card);color:var(--card);border-radius:3px}
 
-/* Skills stay like an evidence index, not generic tech cards */
-.tl-list{list-style:none}
-.tl-item{display:flex;align-items:baseline;gap:8px;padding:12px 0;border-bottom:1px dashed rgba(42,32,19,.25);font-size:14px}
-.tl-item:last-child{border-bottom:none}
-.tl-label{font-weight:600;white-space:nowrap}.tl-fill{flex:1;border-bottom:1px dotted rgba(42,32,19,.4);transform:translateY(-4px)}
-.tl-link{font-family:var(--mono);font-size:12px;color:var(--red-dk);white-space:nowrap}
-.arsenal-group{margin:20px 0}.arsenal-group h3{font-family:var(--mono);font-size:11px;color:var(--card-dk);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
-.stamps{display:flex;flex-wrap:wrap;gap:9px}.toolstamp{font-family:var(--mono);font-size:12px;font-weight:700;padding:6px 11px;border:2px solid var(--card);color:var(--card);border-radius:3px}
+.board{position:relative;padding-top:70px}.board-pin-wrap{position:absolute;top:0;left:50%;transform:translateX(-50%);z-index:6}.board-pin-wrap .pin{position:static;width:20px;height:20px}.strings{position:absolute;inset:0;width:100%;height:100%;z-index:1;overflow:visible;pointer-events:none}.strings path{fill:none;stroke:var(--red);stroke-width:2;opacity:.86;stroke-dasharray:700;stroke-dashoffset:700;transition:stroke-dashoffset 1.1s ease}.strings path.drawn{stroke-dashoffset:0}.cases-row{display:grid;grid-template-columns:1fr 1fr;gap:26px;position:relative;z-index:3}
+.case-folder{background:var(--card);border-radius:2px;box-shadow:0 12px 25px rgba(0,0,0,.34);padding:30px 23px 24px;position:relative;min-height:365px;transition:transform .2s ease,box-shadow .2s ease}.case-folder:nth-child(1){transform:rotate(-1.2deg)}.case-folder:nth-child(2){transform:rotate(.9deg)}.case-folder:hover{box-shadow:0 18px 34px rgba(0,0,0,.4)}.case-folder:nth-child(1):hover{transform:rotate(-.5deg) translateY(-4px)}.case-folder:nth-child(2):hover{transform:rotate(.25deg) translateY(-4px)}.case-folder>.pin{top:-8px}.case-num{font-family:var(--mono);font-size:11px;color:var(--red-dk);font-weight:700;margin-bottom:9px;padding-right:90px}.case-title{font-family:var(--display);font-size:21px;line-height:1.25;margin-bottom:12px;padding-right:76px}.case-title a:hover{text-decoration:underline}.case-desc{font-size:13.5px;color:var(--ink-soft);margin-bottom:16px}.mitre-tags{display:flex;flex-wrap:wrap;gap:6px;margin:15px 0}.mitre-tag{font-family:var(--mono);font-size:10.5px;border:1px solid var(--ink-soft);color:var(--ink-soft);padding:2px 7px;border-radius:2px}.case-status{position:absolute;top:14px;right:15px;z-index:6;min-width:74px;padding:4px 9px 3px;text-align:center;font-family:var(--mono);font-size:10.5px;line-height:1;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;background:rgba(243,233,210,.82);border:2px solid currentColor;border-radius:2px;box-shadow:0 1px 0 rgba(0,0,0,.08);pointer-events:none}.case-status.complete{color:var(--stamp);transform:rotate(5deg)}.dossier-count{margin-top:12px;font-family:var(--mono);font-size:10.5px;font-weight:700;color:var(--ink-soft);letter-spacing:.45px}.dossier-actions{display:flex;flex-wrap:wrap;gap:11px 15px;align-items:center;margin-top:16px}.dossier-link,.dossier-toggle{font-family:var(--mono);font-size:11.5px;font-weight:700;letter-spacing:.25px;border:0;background:transparent;padding:0;color:var(--red-dk);cursor:pointer}.dossier-toggle{color:var(--ink-soft)}.dossier-link:hover,.dossier-toggle:hover{text-decoration:underline}
+.pipeline{font-family:var(--mono);font-size:10px;font-weight:700;color:var(--red-dk);border-top:1px dashed rgba(42,32,19,.28);padding-top:11px;margin-top:14px;letter-spacing:.2px}
 
-/* Two project dossiers only */
-.board{position:relative;padding-top:70px}
-.board-pin-wrap{position:absolute;top:0;left:50%;transform:translateX(-50%);z-index:6}
-.board-pin-wrap .pin{position:static;width:20px;height:20px}
-.strings{position:absolute;inset:0;width:100%;height:100%;z-index:1;overflow:visible;pointer-events:none}
-.strings path{fill:none;stroke:var(--red);stroke-width:2;opacity:.86;stroke-dasharray:700;stroke-dashoffset:700;transition:stroke-dashoffset 1.1s ease}
-.strings path.drawn{stroke-dashoffset:0}
-.cases-row{display:grid;grid-template-columns:1fr 1fr;gap:26px;position:relative;z-index:3}
-.case-folder{
- background:var(--card);border-radius:2px;box-shadow:0 12px 25px rgba(0,0,0,.34);
- padding:27px 23px 24px;position:relative;min-height:330px;transition:transform .2s ease,box-shadow .2s ease
-}
-.case-folder:nth-child(1){transform:rotate(-1.4deg)} .case-folder:nth-child(2){transform:rotate(1deg)}
-.case-folder:hover{box-shadow:0 18px 34px rgba(0,0,0,.4)}
-.case-folder:nth-child(1):hover{transform:rotate(-.7deg) translateY(-4px)}
-.case-folder:nth-child(2):hover{transform:rotate(.4deg) translateY(-4px)}
-.case-folder>.pin{top:-8px}
-.stamp-status{
- position:absolute;top:14px;right:13px;font-family:var(--mono);font-weight:700;font-size:12px;border:2.5px solid var(--stamp);
- color:var(--stamp);border-radius:4px;padding:3px 8px;transform:rotate(10deg);letter-spacing:1px;opacity:.88
-}
-.stamp-status.active{border-color:var(--red-dk);color:var(--red-dk);transform:rotate(-7deg)}
-.case-num{font-family:var(--mono);font-size:11px;color:var(--red-dk);font-weight:700;margin-bottom:9px}
-.case-title{font-family:var(--display);font-size:21px;line-height:1.25;margin-bottom:12px;padding-right:74px}
-.case-desc{font-size:13.5px;color:var(--ink-soft);margin-bottom:16px}
-.evidence-lines{font-family:var(--mono);font-size:11px;color:var(--ink-soft);border-top:1px dashed rgba(42,32,19,.28);padding-top:12px;margin-top:12px}
-.evidence-lines div{margin:5px 0}.evidence-lines b{color:var(--ink)}
-.mitre-tags{display:flex;flex-wrap:wrap;gap:6px;margin:15px 0}
-.mitre-tag{font-family:var(--mono);font-size:10.5px;border:1px solid var(--ink-soft);color:var(--ink-soft);padding:2px 7px;border-radius:2px}
-.open-file{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--red-dk)}
-.private-note{font-family:var(--mono);font-size:11px;color:var(--red-dk);font-weight:700}
+.investigation-branch{position:relative;z-index:2;max-height:0;opacity:0;overflow:hidden;transform:translateY(-10px);transition:max-height .75s ease,opacity .35s ease,transform .45s ease,margin-top .45s ease;margin-top:0}.investigation-branch.open{max-height:1250px;opacity:1;transform:translateY(0);margin-top:52px;overflow:visible}.branch-heading{text-align:center;font-family:var(--mono);color:var(--card-dk);font-size:10.5px;font-weight:700;letter-spacing:1px;margin-bottom:28px;text-transform:uppercase}.branch-line{height:42px;width:2px;background:var(--red);margin:-52px auto 16px;position:relative;box-shadow:0 0 0 1px rgba(0,0,0,.04)}.branch-line:before{content:"";position:absolute;width:17px;height:17px;border-radius:50%;left:50%;top:-8px;transform:translateX(-50%);background:radial-gradient(circle at 35% 30%,#e8746b,var(--red-dk) 70%);box-shadow:0 3px 4px rgba(0,0,0,.42)}
+.branch-files{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;position:relative}.branch-files:before{content:"";position:absolute;left:16.5%;right:16.5%;top:-17px;height:2px;background:var(--red);opacity:.82}.branch-file{position:relative;background:var(--card);border-radius:2px;padding:22px 18px 18px;box-shadow:0 9px 19px rgba(0,0,0,.31);min-height:285px}.branch-file:nth-child(1){transform:rotate(-1deg)}.branch-file:nth-child(2){transform:rotate(.7deg)}.branch-file:nth-child(3){transform:rotate(-.4deg)}.branch-file .pin{top:-8px}.branch-file:before{content:"";position:absolute;width:2px;height:16px;background:var(--red);top:-17px;left:50%;transform:translateX(-50%);opacity:.82}.branch-id{font-family:var(--mono);font-size:10.5px;font-weight:700;color:var(--red-dk);margin-bottom:8px}.branch-title{font-family:var(--display);font-size:16.5px;line-height:1.28;margin-bottom:10px;color:var(--ink)}.branch-desc{font-size:12.5px;line-height:1.55;color:var(--ink-soft);margin-bottom:12px}.branch-tags{display:flex;gap:5px;flex-wrap:wrap;margin:12px 0 15px}.branch-tag{font-family:var(--mono);font-size:9.5px;padding:2px 6px;border:1px solid var(--ink-soft);color:var(--ink-soft);border-radius:2px}.branch-note{font-family:var(--mono);font-size:10.5px;color:var(--red-dk);font-weight:700}.branch-link{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--red-dk)}.branch-link:hover{text-decoration:underline}.architecture-strip{margin-top:20px;background:rgba(42,32,19,.78);color:var(--card);font-family:var(--mono);font-size:11px;text-align:center;padding:12px 14px;border-radius:2px;letter-spacing:.3px;box-shadow:0 6px 14px rgba(0,0,0,.2)}
 
-footer{padding:20px 0 70px}
-.foot-row{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:18px}
-.foot-note{font-family:var(--mono);font-size:11px;color:var(--card-dk)}
+footer{padding:20px 0 70px}.foot-row{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:18px}.foot-note{font-family:var(--mono);font-size:11px;color:var(--card-dk)}
 
 @media(max-width:760px){
- .navlinks{display:none}.wrap{padding:0 17px}header{padding-top:52px}
- .folder{padding:40px 25px 32px}
- .joker-card{width:70px;height:100px;right:-6px;bottom:-24px}
- .joker-note{right:22px;bottom:28px;font-size:13px}
- .cases-row{grid-template-columns:1fr}.board{padding-top:0}.board-pin-wrap,.strings{display:none}
- .case-folder{min-height:0;border-left:3px solid var(--red)}
- .tl-item{display:grid;grid-template-columns:1fr auto}.tl-fill{display:none}.tl-link{grid-column:1/-1;white-space:normal}
-}
-@media(max-width:460px){.night-btn{font-size:9px}.brand{font-size:13px}}
-
-  /* ---------- EXPANDABLE DOSSIER 01 ---------- */
-  .case-folder.primary-dossier{
-    cursor:default;
-  }
-  .case-folder.primary-dossier .case-title a{
-    display:inline-block;
-  }
-  .dossier-actions{
-    display:flex;
-    flex-wrap:wrap;
-    gap:9px;
-    align-items:center;
-    margin-top:16px;
-  }
-  .dossier-link,
-  .dossier-toggle{
-    font-family:var(--mono);
-    font-size:11.5px;
-    font-weight:700;
-    letter-spacing:.25px;
-    border:0;
-    background:transparent;
-    padding:0;
-    color:var(--red-dk);
-    cursor:pointer;
-  }
-  .dossier-link:hover,
-  .dossier-toggle:hover{
-    text-decoration:underline;
-  }
-  .dossier-toggle{
-    color:var(--ink-soft);
-  }
-  .dossier-count{
-    margin-top:12px;
-    font-family:var(--mono);
-    font-size:10.5px;
-    font-weight:700;
-    color:var(--ink-soft);
-    letter-spacing:.45px;
-  }
-
-  .investigation-branch{
-    position:relative;
-    z-index:2;
-    max-height:0;
-    opacity:0;
-    overflow:hidden;
-    transform:translateY(-10px);
-    transition:max-height .7s ease, opacity .35s ease, transform .45s ease, margin-top .45s ease;
-    margin-top:0;
-  }
-  .investigation-branch.open{
-    max-height:900px;
-    opacity:1;
-    transform:translateY(0);
-    margin-top:54px;
-    overflow:visible;
-  }
-
-  .branch-heading{
-    text-align:center;
-    font-family:var(--mono);
-    color:var(--card-dk);
-    font-size:10.5px;
-    font-weight:700;
-    letter-spacing:1px;
-    margin-bottom:28px;
-    text-transform:uppercase;
-  }
-
-  .child-files{
-    display:grid;
-    grid-template-columns:repeat(3,minmax(0,1fr));
-    gap:18px;
-    position:relative;
-    z-index:3;
-  }
-
-  .child-file{
-    position:relative;
-    background:var(--card);
-    border-radius:2px;
-    padding:22px 18px 18px;
-    box-shadow:0 9px 19px rgba(0,0,0,.31);
-    min-height:250px;
-  }
-  .child-file:nth-child(1){transform:rotate(-1.1deg);}
-  .child-file:nth-child(2){transform:rotate(.7deg);}
-  .child-file:nth-child(3){transform:rotate(-.4deg);}
-  .child-file .pin{top:-8px;}
-  .child-id{
-    font-family:var(--mono);
-    font-size:10.5px;
-    font-weight:700;
-    color:var(--red-dk);
-    margin-bottom:8px;
-  }
-  .child-title{
-    font-family:var(--display);
-    font-size:16.5px;
-    line-height:1.28;
-    margin-bottom:10px;
-    color:var(--ink);
-  }
-  .child-desc{
-    font-size:12.5px;
-    line-height:1.55;
-    color:var(--ink-soft);
-    margin-bottom:12px;
-  }
-  .child-tags{
-    display:flex;
-    gap:5px;
-    flex-wrap:wrap;
-    margin:12px 0 15px;
-  }
-  .child-tag{
-    font-family:var(--mono);
-    font-size:9.5px;
-    padding:2px 6px;
-    border:1px solid var(--ink-soft);
-    color:var(--ink-soft);
-    border-radius:2px;
-  }
-  .child-link{
-    font-family:var(--mono);
-    font-size:11px;
-    font-weight:700;
-    color:var(--red-dk);
-  }
-  .child-link:hover{text-decoration:underline;}
-
-  svg.child-strings{
-    position:absolute;
-    left:0;
-    top:-54px;
-    width:100%;
-    height:100%;
-    overflow:visible;
-    pointer-events:none;
-    z-index:1;
-  }
-  svg.child-strings path{
-    fill:none;
-    stroke:var(--red);
-    stroke-width:1.8;
-    opacity:.82;
-    stroke-dasharray:700;
-    stroke-dashoffset:700;
-    transition:stroke-dashoffset .9s ease;
-  }
-  svg.child-strings path.drawn{
-    stroke-dashoffset:0;
-  }
-  .branch-origin{
-    position:absolute;
-    width:18px;
-    height:18px;
-    border-radius:50%;
-    left:50%;
-    top:-62px;
-    transform:translateX(-50%);
-    background:radial-gradient(circle at 35% 30%,#e8746b,var(--red-dk) 70%);
-    box-shadow:0 3px 4px rgba(0,0,0,.42), inset 0 1px 1px rgba(255,255,255,.35);
-    z-index:4;
-  }
-
-  @media(max-width:760px){
-    .investigation-branch.open{
-      margin-top:34px;
-    }
-    .child-files{
-      grid-template-columns:1fr;
-      gap:20px;
-    }
-    svg.child-strings,
-    .branch-origin{
-      display:none;
-    }
-    .child-file{
-      transform:none !important;
-      border-left:3px solid var(--red);
-    }
-  }
-
-
-  /* ---------- DOSSIER STATUS STAMPS ---------- */
-  .case-folder{
-    padding-top:30px;
-  }
-  .case-folder .case-num{
-    padding-right:96px;
-    margin-bottom:11px;
-  }
-  .case-folder .case-title{
-    padding-right:84px;
-  }
-  .case-status{
-    position:absolute;
-    top:14px;
-    right:15px;
-    z-index:6;
-    min-width:68px;
-    padding:4px 9px 3px;
-    text-align:center;
-    font-family:var(--mono);
-    font-size:10.5px;
-    line-height:1;
-    font-weight:700;
-    letter-spacing:1.2px;
-    text-transform:uppercase;
-    background:rgba(243,233,210,.82);
-    border:2px solid currentColor;
-    border-radius:2px;
-    box-shadow:0 1px 0 rgba(0,0,0,.08);
-    pointer-events:none;
-  }
-  .case-status.closed{
-    color:var(--stamp);
-    transform:rotate(5deg);
-  }
-  .case-status.active{
-    color:var(--red-dk);
-    transform:rotate(-4deg);
-  }
-
-  @media(max-width:520px){
-    .case-folder .case-num,
-    .case-folder .case-title{
-      padding-right:74px;
-    }
-    .case-status{
-      top:12px;
-      right:12px;
-      min-width:60px;
-      font-size:9.5px;
-      padding:4px 7px 3px;
-    }
-  }
-
+  .navlinks{display:none}.wrap{padding:0 17px}header{padding-top:52px}.folder{padding:40px 25px 32px}.joker-card{width:70px;height:100px;right:-6px;bottom:-24px}.joker-note{right:22px;bottom:28px;font-size:13px}.cases-row{grid-template-columns:1fr}.board{padding-top:0}.board-pin-wrap,.strings{display:none}.case-folder{min-height:0;border-left:3px solid var(--red);transform:none!important}.branch-files{grid-template-columns:1fr;gap:20px}.branch-files:before,.branch-file:before,.branch-line{display:none}.branch-file{transform:none!important;border-left:3px solid var(--red);min-height:0}.investigation-branch.open{margin-top:34px}.tl-item{display:grid;grid-template-columns:1fr auto}.tl-fill{display:none}.tl-link{grid-column:1/-1;white-space:normal}}
+@media(max-width:520px){.case-num,.case-title{padding-right:74px}.case-status{top:12px;right:12px;min-width:64px;font-size:9.5px;padding:4px 7px 3px}.night-btn{font-size:9px}.brand{font-size:13px}}
 </style>
 </head>
 <body>
@@ -437,9 +75,7 @@ footer{padding:20px 0 70px}
   <div class="wrap">
     <div class="brand">CASE FILE: SEAN</div>
     <div class="navright">
-      <div class="navlinks">
-        <a href="#focus">focus</a><a href="#skills">skills</a><a href="#cases">case files</a><a href="#contact">contact</a>
-      </div>
+      <div class="navlinks"><a href="#focus">focus</a><a href="#skills">skills</a><a href="#cases">case files</a><a href="#contact">contact</a></div>
       <button class="night-btn" id="nightBtn" aria-pressed="false">☾ NIGHT SHIFT</button>
     </div>
   </div>
@@ -451,31 +87,24 @@ footer{padding:20px 0 70px}
       <span class="tape tl"></span><span class="tape tr"></span>
       <div class="stamp-tag"><span class="dot"></span> ACTIVE FILE</div>
       <h1>Sean</h1>
-      <div class="role">Cloud &amp; Cyber Security Analyst</div>
-      <p class="lede">Security analyst with hands on experience in investigations involving threat hunting, SIEM telemetry and detection engineering, with the evidence, reasoning and full process documented throughout.</p>
+      <div class="role">Threat Hunter | Detection Engineer</div>
+      <div class="support-role">Blue Team Investigator</div>
+      <p class="lede">Hands-on blue team work centred on threat hunting, detection engineering and SOC investigations. I build the lab, generate the telemetry, investigate what happened and document the evidence chain from initial activity through analyst response.</p>
       <div class="typed-line"><span>HANDLE:</span> <b>Seanfrvr</b></div>
-      <div class="typed-line"><span>CURRENT FILE:</span> <b>Detection Engineering &amp; Response HL</b></div>
+      <div class="typed-line"><span>FEATURED FILE:</span> <b>Detection Engineering &amp; Response Lab</b></div>
       <div class="cta-row">
         <a class="btn btn-primary" href="#cases">Open Case Files →</a>
         <a class="btn btn-ghost" href="https://www.linkedin.com/in/sean-ngwengwe-04354b3bb/" target="_blank" rel="noopener">LinkedIn</a>
         <a class="btn btn-ghost" href="https://github.com/Seanfrvr" target="_blank" rel="noopener">GitHub</a>
       </div>
-
       <div class="joker-note">WHY SO SERIOUS?</div>
       <div class="joker-card" id="jokerCard" role="button" tabindex="0" aria-label="Toggle hidden night clue">
         <div class="pin"></div>
-        <svg viewBox="0 0 90 130" width="100%" height="100%">
+        <svg viewBox="0 0 90 130" width="100%" height="100%" aria-hidden="true">
           <rect x="1" y="1" width="88" height="128" rx="6" fill="#f3e9d2" stroke="#2a2013" stroke-width="2"/>
           <text x="10" y="20" font-family="Georgia, serif" font-size="13" fill="#7e2c26" font-weight="700">J</text>
           <text x="72" y="118" font-family="Georgia, serif" font-size="13" fill="#7e2c26" font-weight="700" transform="rotate(180 78 112)">J</text>
-          <g transform="translate(45 66)">
-            <path d="M -22 -18 Q -30 -34 -14 -30 Q -8 -40 0 -30 Q 8 -40 14 -30 Q 30 -34 22 -18 Q 14 -8 0 -10 Q -14 -8 -22 -18 Z" fill="#2a2013"/>
-            <circle cx="-22" cy="-19" r="3" fill="#7e2c26"/><circle cx="22" cy="-19" r="3" fill="#7e2c26"/><circle cx="0" cy="-31" r="3" fill="#7e2c26"/>
-            <ellipse cx="0" cy="4" rx="15" ry="17" fill="none" stroke="#2a2013" stroke-width="2.5"/>
-            <path d="M -7 0 Q -5 -3 -3 0 M 3 0 Q 5 -3 7 0" stroke="#2a2013" stroke-width="2" fill="none" stroke-linecap="round"/>
-            <path d="M -8 10 Q 0 17 8 10" stroke="#7e2c26" stroke-width="2.3" fill="none" stroke-linecap="round"/>
-            <path d="M -16 18 L -6 24 L 0 18 L 6 24 L 16 18" stroke="#2a2013" stroke-width="2" fill="none"/>
-          </g>
+          <g transform="translate(45 66)"><path d="M -22 -18 Q -30 -34 -14 -30 Q -8 -40 0 -30 Q 8 -40 14 -30 Q 30 -34 22 -18 Q 14 -8 0 -10 Q -14 -8 -22 -18 Z" fill="#2a2013"/><circle cx="-22" cy="-19" r="3" fill="#7e2c26"/><circle cx="22" cy="-19" r="3" fill="#7e2c26"/><circle cx="0" cy="-31" r="3" fill="#7e2c26"/><ellipse cx="0" cy="4" rx="15" ry="17" fill="none" stroke="#2a2013" stroke-width="2.5"/><path d="M -7 0 Q -5 -3 -3 0 M 3 0 Q 5 -3 7 0" stroke="#2a2013" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M -8 10 Q 0 17 8 10" stroke="#7e2c26" stroke-width="2.3" fill="none" stroke-linecap="round"/><path d="M -16 18 L -6 24 L 0 18 L 6 24 L 16 18" stroke="#2a2013" stroke-width="2" fill="none"/></g>
         </svg>
       </div>
     </div>
@@ -485,9 +114,7 @@ footer{padding:20px 0 70px}
 <section id="focus">
   <div class="wrap">
     <div class="section-head"><span class="idx">01</span><h2>Focus</h2></div>
-    <div class="index-card">
-      <p style="color:var(--ink-soft);font-size:14.5px">Threat hunting and detection engineering through real lab telemetry. The portfolio directly showcases projects I built myself and documented as investigations rather than a wall of generic project cards.</p>
-    </div>
+    <div class="index-card"><p style="color:var(--ink-soft);font-size:14.5px">Blue team investigations built around real lab telemetry: threat hunting, detection validation, incident reasoning, MITRE ATT&amp;CK mapping and response automation. The portfolio is structured as case files so the investigation process is visible, not just the final result.</p></div>
   </div>
 </section>
 
@@ -496,308 +123,89 @@ footer{padding:20px 0 70px}
     <div class="section-head"><span class="idx">02</span><h2>Skills &amp; Projects</h2></div>
     <div class="index-card" style="transform:rotate(-.35deg)">
       <ul class="tl-list">
-        <li class="tl-item">
-          <span class="tl-label">SIEM Threat Hunting &amp; Investigation</span><span class="tl-fill"></span>
-          <a class="tl-link" href="https://github.com/Seanfrvr/Threat-hunting-with-splunk-HL" target="_blank">Splunk Home Lab →</a>
-        </li>
-        <li class="tl-item">
-          <span class="tl-label">Detection Engineering &amp; Response</span><span class="tl-fill"></span>
-          <span class="tl-link">ACTIVE / PRIVATE</span>
-        </li>
+        <li class="tl-item"><span class="tl-label">SIEM Threat Hunting &amp; Investigation</span><span class="tl-fill"></span><a class="tl-link" href="https://github.com/Seanfrvr/Threat-hunting-with-splunk-HL" target="_blank" rel="noopener">Splunk Home Lab →</a></li>
+        <li class="tl-item"><span class="tl-label">Detection Engineering &amp; Response</span><span class="tl-fill"></span><a class="tl-link" href="https://github.com/Seanfrvr/Detection-Engineering-and-Response-HL" target="_blank" rel="noopener">Detection Lab →</a></li>
       </ul>
     </div>
-
-    <div class="arsenal-group">
-      <h3>Investigation &amp; SIEM</h3>
-      <div class="stamps"><span class="toolstamp">SPLUNK</span><span class="toolstamp">WAZUH</span><span class="toolstamp">SYSMON</span></div>
-    </div>
-    <div class="arsenal-group">
-      <h3>Detection &amp; Response</h3>
-      <div class="stamps"><span class="toolstamp">ATOMIC RED TEAM</span><span class="toolstamp">MITRE ATT&amp;CK</span><span class="toolstamp">SHUFFLE SOAR</span><span class="toolstamp">VIRUSTOTAL</span></div>
-    </div>
+    <div class="arsenal-group"><h3>Investigation &amp; SIEM</h3><div class="stamps"><span class="toolstamp">SPLUNK</span><span class="toolstamp">WAZUH</span><span class="toolstamp">SYSMON</span><span class="toolstamp">POWERSHELL</span></div></div>
+    <div class="arsenal-group"><h3>Detection &amp; Response</h3><div class="stamps"><span class="toolstamp">ATOMIC RED TEAM</span><span class="toolstamp">MITRE ATT&amp;CK</span><span class="toolstamp">SHUFFLE SOAR</span><span class="toolstamp">VIRUSTOTAL</span></div></div>
   </div>
 </section>
-
 
 <section id="cases">
   <div class="wrap">
     <div class="section-head"><span class="idx">03</span><h2>Case Files</h2></div>
-    <p class="section-sub">
-      Two dossiers only. One completed threat-hunting project with three attached investigations,
-      and one live detection engineering file still being built.
-    </p>
+    <p class="section-sub">Two completed blue-team dossiers. Open either project overview, or expand the attached investigation branches to see the individual cases behind the project.</p>
 
     <div class="board" id="board">
       <div class="board-pin-wrap"><div class="pin"></div></div>
-      <svg class="strings" id="strings"></svg>
+      <svg class="strings" id="strings" aria-hidden="true"></svg>
 
       <div class="cases-row">
-        <div class="case-folder primary-dossier" data-case id="dossier-one">
-          <div class="pin"></div>
-          <div class="case-status closed">CLOSED</div>
-          <div class="case-num">DOSSIER 01</div>
-
-          <div class="case-title">
-            <a href="https://github.com/Seanfrvr/Threat-hunting-with-splunk-HL" target="_blank" rel="noopener">
-              Threat Hunting with Splunk Home Lab
-            </a>
-          </div>
-
-          <div class="case-desc">
-            Splunk threat-hunting home lab built around the BOTSv3 dataset. I investigated multiple
-            attack scenarios using SPL, event correlation and MITRE ATT&amp;CK mapping, documenting
-            each hunt from initial hypothesis through final findings.
-          </div>
-
-          <div class="mitre-tags">
-            <span class="mitre-tag">SPLUNK</span>
-            <span class="mitre-tag">BOTSv3</span>
-            <span class="mitre-tag">MITRE ATT&amp;CK</span>
-          </div>
-
+        <article class="case-folder" data-case>
+          <div class="pin"></div><div class="case-status complete">COMPLETE</div><div class="case-num">DOSSIER 01</div>
+          <div class="case-title"><a href="https://github.com/Seanfrvr/Threat-hunting-with-splunk-HL" target="_blank" rel="noopener">Threat Hunting with Splunk Home Lab</a></div>
+          <div class="case-desc">Splunk threat-hunting lab built around BOTSv3. Three investigations use SPL, event correlation and ATT&amp;CK mapping to move from hypothesis to evidence-backed findings.</div>
+          <div class="mitre-tags"><span class="mitre-tag">SPLUNK</span><span class="mitre-tag">BOTSv3</span><span class="mitre-tag">MITRE ATT&amp;CK</span></div>
           <div class="dossier-count">3 INVESTIGATIONS ATTACHED</div>
+          <div class="dossier-actions"><a class="dossier-link" href="https://github.com/Seanfrvr/Threat-hunting-with-splunk-HL" target="_blank" rel="noopener">OPEN PROJECT OVERVIEW →</a><button class="dossier-toggle" type="button" data-target="splunkBranch" aria-expanded="false">EXPAND INVESTIGATIONS ↓</button></div>
+        </article>
 
-          <div class="dossier-actions">
-            <a class="dossier-link" href="https://github.com/Seanfrvr/Threat-hunting-with-splunk-HL" target="_blank" rel="noopener">
-              OPEN PROJECT OVERVIEW →
-            </a>
-            <button class="dossier-toggle" id="investigationToggle" type="button" aria-expanded="false" aria-controls="investigationBranch">
-              EXPAND INVESTIGATIONS ↓
-            </button>
-          </div>
-        </div>
+        <article class="case-folder" data-case>
+          <div class="pin"></div><div class="case-status complete">COMPLETE</div><div class="case-num">DOSSIER 02 · FEATURED</div>
+          <div class="case-title"><a href="https://github.com/Seanfrvr/Detection-Engineering-and-Response-HL" target="_blank" rel="noopener">Detection Engineering &amp; Response Lab</a></div>
+          <div class="case-desc">Self-built SOC environment generating live Windows telemetry and tracing controlled adversary behaviour through Sysmon, Wazuh detection, investigation, SOAR recovery and analyst-facing Slack alerts.</div>
+          <div class="mitre-tags"><span class="mitre-tag">WAZUH</span><span class="mitre-tag">SYSMON</span><span class="mitre-tag">ATOMIC RED TEAM</span><span class="mitre-tag">SHUFFLE</span></div>
+          <div class="pipeline">END-TO-END: ENDPOINT → SIEM → SOAR → ANALYST</div>
+          <div class="dossier-count">3 INVESTIGATIONS ATTACHED</div>
+          <div class="dossier-actions"><a class="dossier-link" href="https://github.com/Seanfrvr/Detection-Engineering-and-Response-HL" target="_blank" rel="noopener">OPEN PROJECT OVERVIEW →</a><button class="dossier-toggle" type="button" data-target="detectionBranch" aria-expanded="false">EXPAND INVESTIGATIONS ↓</button></div>
+        </article>
+      </div>
 
-        <div class="case-folder" data-case>
-          <div class="pin"></div>
-          <div class="case-status active">ACTIVE</div>
-          <div class="case-num">DOSSIER 02</div>
-          <div class="case-title">Detection Engineering &amp; Response HL</div>
-          <div class="case-desc">
-            Live SOC lab generating real endpoint telemetry and following the chain from adversary
-            emulation to detection, enrichment and response.
-          </div>
-          <div class="mitre-tags">
-            <span class="mitre-tag">WAZUH</span>
-            <span class="mitre-tag">SYSMON</span>
-            <span class="mitre-tag">ATOMIC RED TEAM</span>
-            <span class="mitre-tag">SOAR</span>
-          </div>
-          <span class="open-file" style="cursor:default;text-decoration:none;">PRIVATE FILE — INVESTIGATION IN PROGRESS</span>
+      <div class="investigation-branch" id="splunkBranch">
+        <div class="branch-line"></div><div class="branch-heading">Attached investigation branch / Dossier 01</div>
+        <div class="branch-files">
+          <article class="branch-file"><div class="pin"></div><div class="branch-id">FILE 01</div><div class="branch-title">Encoded PowerShell Execution</div><div class="branch-desc">Obfuscated PowerShell behaviour investigated in Splunk and decoded to recover the underlying activity.</div><div class="branch-tags"><span class="branch-tag">T1059.001</span><span class="branch-tag">T1140</span></div><a class="branch-link" href="https://github.com/Seanfrvr/Threat-hunting-with-splunk-HL/blob/main/scenarios/scenario-1-powershell.md" target="_blank" rel="noopener">OPEN INVESTIGATION →</a></article>
+          <article class="branch-file"><div class="pin"></div><div class="branch-id">FILE 02</div><div class="branch-title">Linux SSH Brute Force</div><div class="branch-desc">Password-spray activity investigated across multiple source IPs, with the final hunt confirming the attempt was unsuccessful.</div><div class="branch-tags"><span class="branch-tag">T1110.001</span><span class="branch-tag">T1087</span></div><a class="branch-link" href="https://github.com/Seanfrvr/Threat-hunting-with-splunk-HL/blob/main/scenarios/scenario-2-ssh-bruteforce.md" target="_blank" rel="noopener">OPEN INVESTIGATION →</a></article>
+          <article class="branch-file"><div class="pin"></div><div class="branch-id">FILE 03</div><div class="branch-title">AWS CloudTrail — S3 Exposure</div><div class="branch-desc">Compromised IAM activity and S3 exposure investigated through CloudTrail evidence, with no confirmed data exfiltration.</div><div class="branch-tags"><span class="branch-tag">T1078</span><span class="branch-tag">T1530</span></div><a class="branch-link" href="https://github.com/Seanfrvr/Threat-hunting-with-splunk-HL/blob/main/scenarios/scenario-3-aws-cloudtrail.md" target="_blank" rel="noopener">OPEN INVESTIGATION →</a></article>
         </div>
       </div>
 
-      <div class="investigation-branch" id="investigationBranch">
-        <div class="branch-origin" id="branchOrigin"></div>
-        <svg class="child-strings" id="childStrings"></svg>
-        <div class="branch-heading">Attached evidence files / Dossier 01</div>
-
-        <div class="child-files">
-          <article class="child-file" data-child>
-            <div class="pin"></div>
-            <div class="child-id">FILE 01</div>
-            <div class="child-title">Encoded PowerShell Execution</div>
-            <div class="child-desc">
-              Obfuscated PowerShell download cradle investigated in Splunk and decoded to recover the underlying behavior.
-            </div>
-            <div class="child-tags">
-              <span class="child-tag">T1059.001</span>
-              <span class="child-tag">T1140</span>
-            </div>
-            <a class="child-link"
-               href="https://github.com/Seanfrvr/Threat-hunting-with-splunk-HL/blob/main/scenarios/scenario-1-powershell.md"
-               target="_blank" rel="noopener">
-              OPEN INVESTIGATION →
-            </a>
-          </article>
-
-          <article class="child-file" data-child>
-            <div class="pin"></div>
-            <div class="child-id">FILE 02</div>
-            <div class="child-title">Linux SSH Brute Force</div>
-            <div class="child-desc">
-              Password-spray activity investigated across multiple source IPs, with the final hunt confirming the attempt was unsuccessful.
-            </div>
-            <div class="child-tags">
-              <span class="child-tag">T1110.001</span>
-              <span class="child-tag">T1087</span>
-            </div>
-            <a class="child-link"
-               href="https://github.com/Seanfrvr/Threat-hunting-with-splunk-HL/blob/main/scenarios/scenario-2-ssh-bruteforce.md"
-               target="_blank" rel="noopener">
-              OPEN INVESTIGATION →
-            </a>
-          </article>
-
-          <article class="child-file" data-child>
-            <div class="pin"></div>
-            <div class="child-id">FILE 03</div>
-            <div class="child-title">AWS CloudTrail — S3 Exposure</div>
-            <div class="child-desc">
-              Compromised IAM activity and S3 exposure investigated through CloudTrail evidence, with no confirmed data exfiltration.
-            </div>
-            <div class="child-tags">
-              <span class="child-tag">T1078</span>
-              <span class="child-tag">T1530</span>
-            </div>
-            <a class="child-link"
-               href="https://github.com/Seanfrvr/Threat-hunting-with-splunk-HL/blob/main/scenarios/scenario-3-aws-cloudtrail.md"
-               target="_blank" rel="noopener">
-              OPEN INVESTIGATION →
-            </a>
-          </article>
+      <div class="investigation-branch" id="detectionBranch">
+        <div class="branch-line"></div><div class="branch-heading">Attached investigation branch / Dossier 02</div>
+        <div class="branch-files">
+          <article class="branch-file"><div class="pin"></div><div class="branch-id">INVESTIGATION 01</div><div class="branch-title">Credential Access Attempt &amp; Threat-Hunting Pivot</div><div class="branch-desc">A blocked and unsuccessful Mimikatz attempt became the starting point for a wider hunt. Wazuh/Sysmon evidence surfaced Application Shimming and Ingress Tool Transfer activity, followed by recovery of a broken Wazuh manager.</div><div class="branch-tags"><span class="branch-tag">T1003.001</span><span class="branch-tag">T1546.011</span><span class="branch-tag">T1105</span></div><div class="branch-note">BLOCK → HUNT → PIVOT → RECOVER</div></article>
+          <article class="branch-file"><div class="pin"></div><div class="branch-id">INVESTIGATION 02</div><div class="branch-title">Scheduled Task Persistence</div><div class="branch-desc">Atomic Red Team created Scheduled Task persistence. Raw Sysmon process telemetry proved the exact schtasks.exe creation command while the default Wazuh alert mapped only supporting Windows Command Shell behaviour, exposing a detection gap.</div><div class="branch-tags"><span class="branch-tag">T1053.005</span><span class="branch-tag">T1059.003</span></div><div class="branch-note">EMULATE → HUNT → VALIDATE → FIND GAP</div></article>
+          <article class="branch-file"><div class="pin"></div><div class="branch-id">INVESTIGATION 03</div><div class="branch-title">Encoded PowerShell &amp; SOAR Response</div><div class="branch-desc">A benign Base64-encoded PowerShell command triggered Wazuh Rule 92057 mapped to PowerShell. After repairing the downstream Shuffle integration, a controlled retest completed the full Wazuh → Shuffle → Slack response chain.</div><div class="branch-tags"><span class="branch-tag">T1059.001</span><span class="branch-tag">RULE 92057</span><span class="branch-tag">SOAR</span></div><div class="branch-note">EXECUTE → DETECT → REPAIR → RETEST → ALERT</div></article>
         </div>
+        <div class="architecture-strip">WINDOWS 11 + SYSMON → WAZUH SIEM → SHUFFLE SOAR → SLACK SOC ALERT</div>
       </div>
     </div>
   </div>
 </section>
 
-
 <footer id="contact">
   <div class="wrap">
     <div class="section-head"><span class="idx">04</span><h2>Contact</h2></div>
-    <div class="index-card">
-      <ul class="tl-list">
-        <li class="tl-item"><span class="tl-label">GitHub</span><span class="tl-fill"></span><a class="tl-link" href="https://github.com/Seanfrvr" target="_blank">github.com/Seanfrvr →</a></li>
-        <li class="tl-item"><span class="tl-label">LinkedIn</span><span class="tl-fill"></span><a class="tl-link" href="https://www.linkedin.com/in/sean-ngwengwe-04354b3bb/" target="_blank">in/sean-ngwengwe →</a></li>
-        <li class="tl-item"><span class="tl-label">Email</span><span class="tl-fill"></span><a class="tl-link" href="mailto:seanngwe0611@gmail.com">seanngwe0611@gmail.com →</a></li>
-      </ul>
-    </div>
+    <div class="index-card"><ul class="tl-list"><li class="tl-item"><span class="tl-label">GitHub</span><span class="tl-fill"></span><a class="tl-link" href="https://github.com/Seanfrvr" target="_blank" rel="noopener">github.com/Seanfrvr →</a></li><li class="tl-item"><span class="tl-label">LinkedIn</span><span class="tl-fill"></span><a class="tl-link" href="https://www.linkedin.com/in/sean-ngwengwe-04354b3bb/" target="_blank" rel="noopener">in/sean-ngwengwe →</a></li><li class="tl-item"><span class="tl-label">Email</span><span class="tl-fill"></span><a class="tl-link" href="mailto:seanngwe0611@gmail.com">seanngwe0611@gmail.com →</a></li></ul></div>
     <div class="foot-row"><div class="foot-note">// evidence board maintained by Seanfrvr</div><div class="foot-note">// 2026</div></div>
   </div>
 </footer>
 
-
 <script>
 (function(){
-  var nightBtn = document.getElementById('nightBtn');
-  var jokerCard = document.getElementById('jokerCard');
+  var nightBtn=document.getElementById('nightBtn');var jokerCard=document.getElementById('jokerCard');var reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(nightBtn){nightBtn.addEventListener('click',function(){document.body.classList.toggle('night');var n=document.body.classList.contains('night');nightBtn.setAttribute('aria-pressed',n?'true':'false');nightBtn.textContent=n?'☀ DAY FILE':'☾ NIGHT SHIFT';});}
+  function toggleJoker(){document.body.classList.toggle('joker-open')}
+  if(jokerCard){jokerCard.addEventListener('click',toggleJoker);jokerCard.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();toggleJoker();}})}
 
-  if (nightBtn) {
-    nightBtn.addEventListener('click', function(){
-      document.body.classList.toggle('night');
-      var isNight = document.body.classList.contains('night');
-      nightBtn.setAttribute('aria-pressed', isNight ? 'true' : 'false');
-      nightBtn.textContent = isNight ? '☀ DAY FILE' : '☾ NIGHT SHIFT';
-    });
-  }
+  var board=document.getElementById('board'),svg=document.getElementById('strings'),pinWrap=document.querySelector('.board-pin-wrap .pin'),cases=document.querySelectorAll('[data-case]');
+  function drawStrings(){if(!board||!svg||!pinWrap)return;if(window.innerWidth<=760){svg.innerHTML='';return}var br=board.getBoundingClientRect(),pr=pinWrap.getBoundingClientRect(),sx=pr.left+pr.width/2-br.left,sy=pr.top+pr.height/2-br.top;svg.setAttribute('width',br.width);svg.setAttribute('height',br.height);svg.innerHTML='';cases.forEach(function(el,i){var p=el.querySelector('.pin'),r=p.getBoundingClientRect(),ex=r.left+r.width/2-br.left,ey=r.top+r.height/2-br.top,path=document.createElementNS('http://www.w3.org/2000/svg','path');path.setAttribute('d','M '+sx+' '+sy+' Q '+((sx+ex)/2)+' '+(((sy+ey)/2)-18)+' '+ex+' '+ey);svg.appendChild(path);setTimeout(function(){path.classList.add('drawn')},reduceMotion?0:140+i*180);});}
 
-  function toggleJokerClue(){
-    document.body.classList.toggle('joker-open');
-  }
-
-  if (jokerCard) {
-    jokerCard.addEventListener('click', toggleJokerClue);
-    jokerCard.addEventListener('keydown', function(e){
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        toggleJokerClue();
-      }
-    });
-  }
-
-  var board = document.getElementById('board');
-  var svg = document.getElementById('strings');
-  var pinWrap = document.querySelector('.board-pin-wrap .pin');
-  var cases = document.querySelectorAll('[data-case]');
-  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  function drawStrings(){
-    if (window.innerWidth <= 760) { svg.innerHTML = ''; return; }
-    var boardRect = board.getBoundingClientRect();
-    var pinRect = pinWrap.getBoundingClientRect();
-    var startX = pinRect.left + pinRect.width/2 - boardRect.left;
-    var startY = pinRect.top + pinRect.height/2 - boardRect.top;
-
-    svg.setAttribute('width', boardRect.width);
-    svg.setAttribute('height', boardRect.height);
-    svg.innerHTML = '';
-
-    cases.forEach(function(el, i){
-      var pin = el.querySelector('.pin');
-      var r = pin.getBoundingClientRect();
-      var endX = r.left + r.width/2 - boardRect.left;
-      var endY = r.top + r.height/2 - boardRect.top;
-      var midY = (startY + endY) / 2;
-
-      var path = document.createElementNS('http://www.w3.org/2000/svg','path');
-      var d = 'M ' + startX + ' ' + startY +
-              ' Q ' + ((startX+endX)/2) + ' ' + (midY - 18) +
-              ' ' + endX + ' ' + endY;
-      path.setAttribute('d', d);
-      svg.appendChild(path);
-
-      setTimeout(function(){
-        path.classList.add('drawn');
-      }, reduceMotion ? 0 : 150 + i*180);
-    });
-  }
-
-  var toggle = document.getElementById('investigationToggle');
-  var branch = document.getElementById('investigationBranch');
-  var childSvg = document.getElementById('childStrings');
-  var origin = document.getElementById('branchOrigin');
-  var children = document.querySelectorAll('[data-child]');
-
-  function drawChildStrings(){
-    if (!branch.classList.contains('open') || window.innerWidth <= 760) {
-      childSvg.innerHTML = '';
-      return;
-    }
-
-    var branchRect = branch.getBoundingClientRect();
-    var originRect = origin.getBoundingClientRect();
-    var startX = originRect.left + originRect.width/2 - branchRect.left;
-    var startY = originRect.top + originRect.height/2 - branchRect.top;
-
-    childSvg.setAttribute('width', branchRect.width);
-    childSvg.setAttribute('height', branchRect.height + 70);
-    childSvg.innerHTML = '';
-
-    children.forEach(function(el, i){
-      var p = el.querySelector('.pin');
-      var r = p.getBoundingClientRect();
-      var endX = r.left + r.width/2 - branchRect.left;
-      var endY = r.top + r.height/2 - branchRect.top + 54;
-
-      var path = document.createElementNS('http://www.w3.org/2000/svg','path');
-      var bendY = (startY + endY) / 2 - 12;
-      var d = 'M ' + startX + ' ' + startY +
-              ' Q ' + ((startX+endX)/2) + ' ' + bendY +
-              ' ' + endX + ' ' + endY;
-      path.setAttribute('d', d);
-      childSvg.appendChild(path);
-
-      setTimeout(function(){
-        path.classList.add('drawn');
-      }, reduceMotion ? 0 : 90 + i*150);
-    });
-  }
-
-  toggle.addEventListener('click', function(){
-    var open = branch.classList.toggle('open');
-    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-    toggle.textContent = open ? 'HIDE INVESTIGATIONS ↑' : 'EXPAND INVESTIGATIONS ↓';
-
-    if (open) {
-      setTimeout(function(){
-        drawChildStrings();
-        branch.scrollIntoView({behavior: reduceMotion ? 'auto' : 'smooth', block:'nearest'});
-      }, 470);
-    } else {
-      childSvg.innerHTML = '';
-    }
-  });
-
-  window.addEventListener('load', drawStrings);
-  window.addEventListener('resize', function(){
-    clearTimeout(window._rt);
-    window._rt = setTimeout(function(){
-      drawStrings();
-      drawChildStrings();
-    }, 150);
-  });
+  var toggles=document.querySelectorAll('.dossier-toggle');
+  toggles.forEach(function(btn){btn.addEventListener('click',function(){var id=btn.getAttribute('data-target'),target=document.getElementById(id),wasOpen=target.classList.contains('open');document.querySelectorAll('.investigation-branch').forEach(function(branch){branch.classList.remove('open')});toggles.forEach(function(b){b.setAttribute('aria-expanded','false');b.textContent='EXPAND INVESTIGATIONS ↓'});if(!wasOpen){target.classList.add('open');btn.setAttribute('aria-expanded','true');btn.textContent='HIDE INVESTIGATIONS ↑';setTimeout(function(){target.scrollIntoView({behavior:reduceMotion?'auto':'smooth',block:'nearest'})},220)}})});
+  window.addEventListener('load',drawStrings);window.addEventListener('resize',function(){clearTimeout(window._rt);window._rt=setTimeout(drawStrings,150)});
 })();
 </script>
-
 </body>
 </html>
