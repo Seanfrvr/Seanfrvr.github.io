@@ -83,7 +83,7 @@ main{max-width:1200px;margin:auto;padding:58px 24px 90px}
   grid-template-columns:minmax(0,1.35fr) minmax(320px,.65fr);
   gap:34px;
   align-items:start;
-  min-height:620px;
+  min-height:700px;
 }
 .hero-folder{
   position:relative; z-index:3;
@@ -148,7 +148,7 @@ h1{font:400 clamp(48px,7vw,82px) var(--display);line-height:.98;margin:0 0 8px}
 }
 
 .caseboard{
-  position:relative; min-height:540px; padding:34px 24px 24px;
+  position:relative; min-height:680px; padding:34px 24px 24px;
   border:1px solid rgba(255,245,224,.06);
 }
 .caseboard:before{
@@ -167,6 +167,7 @@ h1{font:400 clamp(48px,7vw,82px) var(--display);line-height:.98;margin:0 0 8px}
 .polaroid{padding:12px 12px 18px;width:205px}
 .polaroid.one{top:108px;left:2%;transform:rotate(-5deg)}
 .polaroid.two{top:260px;right:1%;transform:rotate(4deg)}
+.polaroid.three{top:430px;left:5%;transform:rotate(-3deg)}
 .photo{
   height:118px;background:#201a15;border:1px solid rgba(255,255,255,.04);
   padding:12px;color:#d8cab5;font:700 10px var(--mono);line-height:1.55;overflow:hidden;
@@ -178,7 +179,7 @@ h1{font:400 clamp(48px,7vw,82px) var(--display);line-height:.98;margin:0 0 8px}
 .note-card h3{font:400 16px var(--display);margin:0 0 8px}
 .note-card p{font:700 10px var(--mono);line-height:1.55;color:var(--ink2);margin:0}
 .clue{
-  position:absolute;left:30%;bottom:55px;width:175px;padding:14px 16px;background:#d7c08f;
+  position:absolute;left:42%;bottom:24px;width:175px;padding:14px 16px;background:#d7c08f;
   box-shadow:0 10px 18px rgba(0,0,0,.25);transform:rotate(-2deg);z-index:4;
   font:700 10px var(--mono);line-height:1.55;
 }
@@ -233,6 +234,43 @@ h1{font:400 clamp(48px,7vw,82px) var(--display);line-height:.98;margin:0 0 8px}
 .project-folder:first-child{transform:rotate(-1deg)}.project-folder:last-child{transform:rotate(.8deg)}
 .project-folder .pin{top:-8px}
 .status{position:absolute;top:16px;right:16px;border:2px solid var(--green);color:var(--green);font:700 9px var(--mono);padding:4px 8px;letter-spacing:1px;transform:rotate(4deg)}
+.status.building{border-color:var(--gold);color:#7c5724;background:rgba(241,230,205,.42)}
+.active-project{
+  grid-column:1 / -1;
+  min-height:0;
+  padding-right:36px;
+  transform:rotate(-.35deg) !important;
+}
+.active-project:after{
+  content:"CURRENT BUILD";
+  position:absolute;
+  left:28px;
+  bottom:-12px;
+  background:var(--red2);
+  color:var(--paper);
+  padding:5px 10px;
+  font:700 9px var(--mono);
+  letter-spacing:1px;
+  transform:rotate(-1deg);
+  box-shadow:0 6px 12px rgba(0,0,0,.22);
+}
+.building-inline{
+  color:var(--red2);
+  font-style:normal;
+  font-size:.9em;
+}
+.current-skill b:after{
+  content:"  • CURRENT BUILD";
+  color:var(--red2);
+  font:700 9px var(--mono);
+  letter-spacing:.6px;
+}
+.private-note{
+  color:var(--ink2);
+  font:700 9px var(--mono);
+  letter-spacing:.7px;
+}
+
 .dossier{font:700 10px var(--mono);color:var(--red2);letter-spacing:1px;margin-bottom:10px}
 .project-folder h3{font:400 23px var(--display);line-height:1.2;margin:0 0 14px;padding-right:80px}
 .project-folder p{font-size:13.5px;color:var(--ink2);line-height:1.68;margin:0}
@@ -257,6 +295,15 @@ h1{font:400 clamp(48px,7vw,82px) var(--display);line-height:.98;margin:0 0 8px}
 .file-card h4{font:400 16px var(--display);margin:0 0 10px;line-height:1.3}
 .file-card p{font-size:12px;line-height:1.55;color:var(--ink2);margin:0 0 12px}
 .file-note{font:700 9.5px var(--mono);color:var(--red2)}
+.file-open{
+  display:inline-block;
+  margin-top:16px;
+  color:var(--red2);
+  font:700 10px var(--mono);
+  letter-spacing:.4px;
+}
+.file-open:hover{text-decoration:underline}
+
 
 .contact-sheet{background:var(--paper);padding:30px 34px;box-shadow:0 15px 28px rgba(0,0,0,.28);position:relative}
 .contact-row{display:grid;grid-template-columns:120px 1fr auto;gap:16px;padding:12px 0;border-bottom:1px dashed rgba(45,32,19,.25);align-items:center}
@@ -271,7 +318,7 @@ body.night .rain{opacity:.24}
 @media(max-width:980px){
   .hero{grid-template-columns:1fr;gap:58px}
   .hero-folder{max-width:820px;margin-left:auto;margin-right:auto}
-  .caseboard{min-height:420px;max-width:760px;width:100%;margin:0 auto}
+  .caseboard{min-height:680px;max-width:760px;width:100%;margin:0 auto}
   .skills-wrap{grid-template-columns:1fr}
   .projects-grid{grid-template-columns:1fr}
   .drawer-files{grid-template-columns:1fr}
@@ -312,11 +359,57 @@ body.night .rain{opacity:.24}
     font-size:13px;
     white-space:nowrap;
   }
-  .caseboard{display:none}
+  /* Keep the original Active Investigations board on mobile.
+     Because it already sits after the hero dossier in the HTML,
+     showing it here naturally places it above Focus. */
+  .caseboard{
+    display:block;
+    width:100%;
+    max-width:390px;
+    min-height:680px;
+    margin:4px auto 0;
+    padding:34px 10px 20px;
+    overflow:visible;
+  }
+  .caseboard:before{
+    left:12px;
+    font-size:9px;
+  }
+  .caseboard .thread-svg{
+    inset:22px 0 0;
+  }
+  .caseboard .polaroid{
+    width:205px;
+  }
+  .caseboard .polaroid.one{
+    top:108px;
+    left:0;
+  }
+  .caseboard .note-card{
+    width:190px;
+    top:90px;
+    right:0;
+  }
+  .caseboard .polaroid.two{
+    top:260px;
+    right:0;
+  }
+  .caseboard .polaroid.three{
+    top:438px;
+    left:0;
+  }
+  .caseboard .clue{
+    left:43%;
+    bottom:14px;
+    width:175px;
+  }
   .section{margin-top:64px}
   .projects-stage{padding-top:20px}
   .central-pin{display:none}
   .project-folder{min-height:0}
+  .active-project{grid-column:auto;padding-right:28px}
+  .active-project:after{left:22px;bottom:-11px}
+  .current-skill b:after{display:block;margin-top:5px}
   .contact-row{grid-template-columns:90px 1fr}
   .contact-row .dots{display:none}
   .contact-row a{grid-column:2}
@@ -338,6 +431,24 @@ body.night .rain{opacity:.24}
   .btn{font-size:10.5px;padding:10px 12px}
   .joker{right:10px;bottom:12px}
   .joker-note{right:82px;bottom:34px;font-size:12px}
+  .caseboard{
+    min-height:680px;
+    padding-left:4px;
+    padding-right:4px;
+  }
+  .caseboard .polaroid{
+    width:198px;
+    padding:11px 11px 17px;
+  }
+  .caseboard .note-card{
+    width:184px;
+    padding:16px;
+  }
+  .caseboard .clue{
+    width:172px;
+    left:42%;
+    bottom:10px;
+  }
   .focus-dossier,.skills-sheet,.contact-sheet{padding-left:22px;padding-right:22px}
   .focus-dossier:before,.skills-sheet:before{left:18px}
   .skill-row{grid-template-columns:1fr;gap:7px}
@@ -374,7 +485,7 @@ body.night .rain{opacity:.24}
 
         <div class="meta-grid">
           <div class="meta-row"><span class="k">HANDLE:</span><span class="v">Seanfrvr</span></div>
-          <div class="meta-row featured-meta"><span class="k">FEATURED FILES:</span><span class="v"><a href="https://github.com/Seanfrvr/Threat-hunting-with-splunk-HL" target="_blank">Threat Hunting with Splunk Home Lab</a> · <a href="https://github.com/Seanfrvr/Detection-Engineering-and-Response-HL" target="_blank">Detection Engineering &amp; Response Lab</a></span></div>
+          <div class="meta-row featured-meta"><span class="k">FEATURED FILES:</span><span class="v"><a href="https://github.com/Seanfrvr/Network-Detection-and-Packet-Forensics-home-lab" target="_blank">Network Detection &amp; Packet Forensics <em class="building-inline">[BUILDING]</em></a> · <a href="https://github.com/Seanfrvr/Threat-hunting-with-splunk-HL" target="_blank">Threat Hunting with Splunk Home Lab</a> · <a href="https://github.com/Seanfrvr/Detection-Engineering-and-Response-HL" target="_blank">Detection Engineering &amp; Response Lab</a></span></div>
         </div>
 
         <div class="actions">
@@ -391,12 +502,14 @@ body.night .rain{opacity:.24}
 
       <aside class="caseboard">
         <div class="node-pin main"></div>
-        <svg class="thread-svg" viewBox="0 0 500 540" preserveAspectRatio="none" aria-hidden="true">
+        <svg class="thread-svg" viewBox="0 0 500 680" preserveAspectRatio="none" aria-hidden="true">
           <path d="M250 45 C185 92 120 122 88 185" />
           <path d="M250 45 C332 104 398 133 413 174" />
-          <path d="M250 45 C246 175 250 270 248 412" />
-          <path d="M88 185 C145 248 180 303 248 412" />
-          <path d="M413 174 C362 245 325 305 248 412" />
+          <path d="M250 45 C246 175 250 270 248 510" />
+          <path d="M88 185 C145 248 178 334 120 492" />
+          <path d="M413 174 C362 245 330 330 338 390" />
+          <path d="M120 492 C175 520 216 528 248 510" />
+          <path d="M338 390 C305 435 280 475 248 510" />
         </svg>
 
         <div class="polaroid one">
@@ -428,6 +541,18 @@ body.night .rain{opacity:.24}
           <div class="cap">EXHIBIT 02A // DETECTION PIPELINE</div>
         </div>
 
+        <div class="polaroid three">
+          <div class="photo">
+            <span class="g">WIRESHARK / ZEEK</span><br>
+            packet reconstruction<br>
+            DNS + TLS behaviour<br>
+            Suricata IDS output<br>
+            cross-source correlation<br>
+            <span class="r">traffic → evidence → finding</span>
+          </div>
+          <div class="cap">EXHIBIT 03A // NETWORK FORENSICS</div>
+        </div>
+
         <div class="clue">“What did the telemetry prove — and what did the alert miss?”</div>
       </aside>
     </section>
@@ -443,6 +568,10 @@ body.night .rain{opacity:.24}
       <div class="section-head"><span class="idx">02</span><h2>Skills &amp; Projects</h2></div>
       <div class="skills-wrap">
         <div class="skills-sheet">
+          <div class="skill-row current-skill">
+            <b>Network Detection &amp; Packet Forensics</b>
+            <a href="https://github.com/Seanfrvr/Network-Detection-and-Packet-Forensics-home-lab" target="_blank">Building now →</a>
+          </div>
           <div class="skill-row">
             <b>SIEM Threat Hunting &amp; Investigation</b>
             <a href="https://github.com/Seanfrvr/Threat-hunting-with-splunk-HL" target="_blank">Splunk Home Lab →</a>
@@ -454,6 +583,9 @@ body.night .rain{opacity:.24}
         </div>
 
         <div class="inventory">
+          <div class="inventory-block" data-label="NETWORK FORENSICS">
+            <div class="stamps"><span class="stamp">WIRESHARK</span><span class="stamp">ZEEK</span><span class="stamp">SURICATA</span><span class="stamp">TSHARK</span></div>
+          </div>
           <div class="inventory-block" data-label="INVESTIGATION & SIEM">
             <div class="stamps"><span class="stamp">SPLUNK</span><span class="stamp">WAZUH</span><span class="stamp">SYSMON</span><span class="stamp">POWERSHELL</span></div>
           </div>
@@ -466,16 +598,29 @@ body.night .rain{opacity:.24}
 
     <section class="section" id="cases">
       <div class="section-head"><span class="idx">03</span><h2>Case Files</h2></div>
-      <p class="section-sub">Two completed blue-team dossiers. Open either project overview, or expand the attached investigation branches to see the individual cases behind the project.</p>
+      <p class="section-sub">One active network forensics build and two completed blue team dossiers. The active file stays deliberately lean while the investigation is still underway; completed cases retain their attached investigation branches.</p>
 
       <div class="projects-stage">
-        <div class="central-pin"></div>
         <div class="projects-grid">
+          <article class="project-folder active-project">
+            <div class="pin"></div><div class="status building">BUILDING</div>
+            <div class="dossier">DOSSIER 03 · ACTIVE CASE</div>
+            <h3>Network Detection &amp; Packet Forensics Lab</h3>
+            <p>Network forensics lab built around reconstructing suspicious traffic across Wireshark, Zeek and Suricata. Investigations correlate packet level evidence with structured network telemetry and IDS output to identify suspicious behaviour, validate detection coverage, and produce evidence backed findings.</p>
+            <div class="tags"><span class="tag">WIRESHARK</span><span class="tag">ZEEK</span><span class="tag">SURICATA</span><span class="tag">TSHARK</span></div>
+            <div class="pipeline">RAW TRAFFIC → NETWORK TELEMETRY → IDS → ANALYST FINDING</div>
+            <div class="attachments">NETWORK INVESTIGATIONS · DETECTION VALIDATION · PACKET FORENSICS</div>
+            <div class="project-actions">
+              <a href="https://github.com/Seanfrvr/Network-Detection-and-Packet-Forensics-home-lab" target="_blank">OPEN PROJECT REPO →</a>
+              <span class="private-note">PRIVATE UNTIL RELEASE</span>
+            </div>
+          </article>
+
           <article class="project-folder">
             <div class="pin"></div><div class="status">COMPLETE</div>
             <div class="dossier">DOSSIER 01</div>
             <h3>Threat Hunting with Splunk Home Lab</h3>
-            <p>Splunk threat-hunting lab built around BOTSv3. Three investigations use SPL, event correlation and ATT&amp;CK mapping to move from hypothesis to evidence-backed findings.</p>
+            <p>Splunk threat hunting lab built around BOTSv3. Three investigations use SPL, event correlation and ATT&amp;CK mapping to move from hypothesis to evidence backed findings.</p>
             <div class="tags"><span class="tag">SPLUNK</span><span class="tag">BOTSv3</span><span class="tag">MITRE ATT&amp;CK</span></div>
             <div class="attachments">3 INVESTIGATIONS ATTACHED</div>
             <div class="project-actions">
@@ -488,7 +633,7 @@ body.night .rain{opacity:.24}
             <div class="pin"></div><div class="status">COMPLETE</div>
             <div class="dossier">DOSSIER 02 · FEATURED</div>
             <h3>Detection Engineering &amp; Response Lab</h3>
-            <p>Self-built SOC environment generating live Windows telemetry and tracing controlled adversary behaviour through Sysmon, Wazuh detection, investigation, SOAR recovery and analyst-facing Slack alerts.</p>
+            <p>Self built SOC environment generating live Windows telemetry and tracing controlled adversary behaviour through Sysmon, Wazuh detection, investigation, SOAR recovery and analyst facing Slack alerts.</p>
             <div class="tags"><span class="tag">WAZUH</span><span class="tag">SYSMON</span><span class="tag">ATOMIC RED TEAM</span><span class="tag">SHUFFLE</span></div>
             <div class="pipeline">END-TO-END: ENDPOINT → SIEM → SOAR → ANALYST</div>
             <div class="attachments">3 INVESTIGATIONS ATTACHED</div>
@@ -502,18 +647,18 @@ body.night .rain{opacity:.24}
         <div class="drawer" id="splunkDrawer">
           <div class="drawer-title">ATTACHED INVESTIGATION BRANCH // DOSSIER 01</div>
           <div class="drawer-files">
-            <article class="file-card"><div class="file-id">FILE 01</div><h4>Encoded PowerShell Execution</h4><p>Obfuscated PowerShell behaviour investigated in Splunk and decoded to recover the underlying activity.</p><div class="file-note">T1059.001 · T1140</div></article>
-            <article class="file-card"><div class="file-id">FILE 02</div><h4>Linux SSH Brute Force</h4><p>Password-spray activity investigated across multiple source IPs, with the final hunt confirming the attempt was unsuccessful.</p><div class="file-note">T1110.001 · T1087</div></article>
-            <article class="file-card"><div class="file-id">FILE 03</div><h4>AWS CloudTrail — S3 Exposure</h4><p>Compromised IAM activity and S3 exposure investigated through CloudTrail evidence, with no confirmed data exfiltration.</p><div class="file-note">T1078 · T1530</div></article>
+            <article class="file-card"><div class="file-id">FILE 01</div><h4>Encoded PowerShell Execution</h4><p>Obfuscated PowerShell behaviour investigated in Splunk and decoded to recover the underlying activity.</p><div class="file-note">T1059.001 · T1140</div><a class="file-open" href="https://github.com/Seanfrvr/Threat-hunting-with-splunk-HL/blob/main/scenarios/scenario-1-powershell.md" target="_blank">OPEN FILE →</a></article>
+            <article class="file-card"><div class="file-id">FILE 02</div><h4>Linux SSH Brute Force</h4><p>Password spray activity investigated across multiple source IPs, with the final hunt confirming the attempt was unsuccessful.</p><div class="file-note">T1110.001 · T1087</div><a class="file-open" href="https://github.com/Seanfrvr/Threat-hunting-with-splunk-HL/blob/main/scenarios/scenario-2-ssh-bruteforce.md" target="_blank">OPEN FILE →</a></article>
+            <article class="file-card"><div class="file-id">FILE 03</div><h4>AWS CloudTrail — S3 Exposure</h4><p>Compromised IAM activity and S3 exposure investigated through CloudTrail evidence, with no confirmed data exfiltration.</p><div class="file-note">T1078 · T1530</div><a class="file-open" href="https://github.com/Seanfrvr/Threat-hunting-with-splunk-HL/blob/main/scenarios/scenario-3-aws-cloudtrail.md" target="_blank">OPEN FILE →</a></article>
           </div>
         </div>
 
         <div class="drawer" id="detDrawer">
           <div class="drawer-title">ATTACHED INVESTIGATION BRANCH // DOSSIER 02</div>
           <div class="drawer-files">
-            <article class="file-card"><div class="file-id">INVESTIGATION 01</div><h4>Credential Access Attempt &amp; Threat-Hunting Pivot</h4><p>A blocked and unsuccessful Mimikatz attempt became the starting point for a wider hunt. Wazuh/Sysmon evidence surfaced Application Shimming and Ingress Tool Transfer activity, followed by recovery of a broken Wazuh manager.</p><div class="file-note">BLOCK → HUNT → PIVOT → RECOVER</div></article>
-            <article class="file-card"><div class="file-id">INVESTIGATION 02</div><h4>Scheduled Task Persistence</h4><p>Atomic Red Team created Scheduled Task persistence. Raw Sysmon process telemetry proved the exact schtasks.exe creation command while the default Wazuh alert mapped only supporting Windows Command Shell behaviour, exposing a detection gap.</p><div class="file-note">EMULATE → HUNT → VALIDATE → FIND GAP</div></article>
-            <article class="file-card"><div class="file-id">INVESTIGATION 03</div><h4>Encoded PowerShell &amp; SOAR Response</h4><p>A benign Base64-encoded PowerShell command triggered Wazuh Rule 92057 mapped to PowerShell. After repairing the downstream Shuffle integration, a controlled retest completed the full Wazuh → Shuffle → Slack response chain.</p><div class="file-note">EXECUTE → DETECT → REPAIR → RETEST → ALERT</div></article>
+            <article class="file-card"><div class="file-id">INVESTIGATION 01</div><h4>Credential Access Attempt &amp; Threat-Hunting Pivot</h4><p>A blocked and unsuccessful Mimikatz attempt became the starting point for a wider hunt. Wazuh/Sysmon evidence surfaced Application Shimming and Ingress Tool Transfer activity, followed by recovery of a broken Wazuh manager.</p><div class="file-note">BLOCK → HUNT → PIVOT → RECOVER</div><a class="file-open" href="https://github.com/Seanfrvr/Detection-Engineering-and-Response-HL#investigation-1--credential-access-attempt-and-threat-hunting-pivot" target="_blank">OPEN FILE →</a></article>
+            <article class="file-card"><div class="file-id">INVESTIGATION 02</div><h4>Scheduled Task Persistence</h4><p>Atomic Red Team created Scheduled Task persistence. Raw Sysmon process telemetry proved the exact schtasks.exe creation command while the default Wazuh alert mapped only supporting Windows Command Shell behaviour, exposing a detection gap.</p><div class="file-note">EMULATE → HUNT → VALIDATE → FIND GAP</div><a class="file-open" href="https://github.com/Seanfrvr/Detection-Engineering-and-Response-HL#investigation-2--scheduled-task-persistence-t1053005" target="_blank">OPEN FILE →</a></article>
+            <article class="file-card"><div class="file-id">INVESTIGATION 03</div><h4>Encoded PowerShell &amp; SOAR Response</h4><p>A benign Base64 encoded PowerShell command triggered Wazuh Rule 92057 mapped to PowerShell. After repairing the downstream Shuffle integration, a controlled retest completed the full Wazuh → Shuffle → Slack response chain.</p><div class="file-note">EXECUTE → DETECT → REPAIR → RETEST → ALERT</div><a class="file-open" href="https://github.com/Seanfrvr/Detection-Engineering-and-Response-HL#investigation-3--encoded-powershell-detection-and-soar-recovery" target="_blank">OPEN FILE →</a></article>
           </div>
         </div>
       </div>
