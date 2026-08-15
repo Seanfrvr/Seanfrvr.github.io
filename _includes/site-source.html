@@ -225,62 +225,88 @@ h1{font:400 clamp(48px,7vw,82px) var(--display);line-height:.98;margin:0 0 8px}
   padding:80px 0 20px;
 }
 .central-pin{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:22px;height:22px;border-radius:50%;background:var(--red);box-shadow:0 4px 8px rgba(0,0,0,.45)}
+
 .projects-grid{display:grid;grid-template-columns:1fr 1fr;gap:34px;position:relative;z-index:3}
 .project-folder{
-  position:relative;z-index:1;background:var(--paper);padding:34px 28px 28px;min-height:430px;
-  box-shadow:0 18px 38px rgba(0,0,0,.36);
+  position:relative;
+  background:linear-gradient(180deg,#cdb58d 0%,#c6ad86 100%);
+  border:1px solid rgba(74,56,35,.20);
+  border-top:12px solid #decca7;
+  padding:56px 28px 30px;
+  min-height:430px;
+  box-shadow:0 16px 36px rgba(0,0,0,.30), inset 0 1px 0 rgba(255,247,230,.22);
+  z-index:1;
 }
-.project-folder:before{content:"";position:absolute;inset:12px -13px -15px 14px;background:var(--paper2);z-index:-1;transform:rotate(1.2deg)}
-.project-folder:first-child{transform:rotate(-1deg)}.project-folder:last-child{transform:rotate(.8deg)}
-.project-folder .pin{top:-8px}
-.status{position:absolute;top:16px;right:16px;border:2px solid var(--green);color:var(--green);font:700 9px var(--mono);padding:4px 8px;letter-spacing:1px;transform:rotate(4deg)}
-.status.building{border-color:var(--gold);color:#7c5724;background:rgba(241,230,205,.42)}
-.active-project{
-  grid-column:1 / -1;
-  min-height:0;
-  padding-right:36px;
-  transform:rotate(-.35deg) !important;
-}
-.active-project:after{
-  content:"CURRENT BUILD";
+.project-folder:before{
+  content:"";
   position:absolute;
-  left:28px;
-  bottom:-12px;
-  background:var(--red2);
-  color:var(--paper);
-  padding:5px 10px;
-  font:700 9px var(--mono);
-  letter-spacing:1px;
-  transform:rotate(-1deg);
-  box-shadow:0 6px 12px rgba(0,0,0,.22);
+  inset:10px -9px -10px 10px;
+  background:var(--paper2);
+  border:1px solid rgba(74,56,35,.10);
+  z-index:-1;
+  transform:rotate(.9deg);
+  box-shadow:0 10px 18px rgba(0,0,0,.12);
 }
-.building-inline{
-  color:var(--red2);
-  font-style:normal;
-  font-size:.9em;
+.project-folder:first-child{transform:rotate(-.65deg)}
+.project-folder:last-child{transform:rotate(.55deg)}
+.project-folder .pin{top:-8px}
+.status{
+  position:absolute;top:16px;right:16px;
+  border:2px solid var(--green);color:var(--green);
+  font:700 9px var(--mono);padding:4px 8px;
+  letter-spacing:1px;transform:rotate(4deg);
+  background:rgba(235,242,233,.14);opacity:.82
 }
-.current-skill b:after{
-  content:"  • CURRENT BUILD";
-  color:var(--red2);
-  font:700 9px var(--mono);
-  letter-spacing:.6px;
+.status.building{border-color:var(--gold);color:#7c5724;background:rgba(241,230,205,.32)}
+.active-project{grid-column:1 / -1;min-height:0;padding-right:36px;transform:rotate(-.15deg) !important}
+.active-project:after{
+  content:"CURRENT BUILD";position:absolute;left:28px;bottom:-12px;
+  background:var(--red2);color:var(--paper);padding:5px 10px;
+  font:700 9px var(--mono);letter-spacing:1px;transform:rotate(-1deg);
+  box-shadow:0 6px 12px rgba(0,0,0,.22)
 }
-.private-note{
-  color:var(--ink2);
-  font:700 9px var(--mono);
-  letter-spacing:.7px;
-}
+.building-inline{color:var(--red2);font-style:normal;font-size:.9em}
+.current-skill b:after{content:"  • CURRENT BUILD";color:var(--red2);font:700 9px var(--mono);letter-spacing:.6px}
+.private-note{color:var(--ink2);font:700 9px var(--mono);letter-spacing:.7px}
 
-.dossier{font:700 10px var(--mono);color:var(--red2);letter-spacing:1px;margin-bottom:10px}
+.dossier{
+  position:absolute;
+  top:-13px;
+  left:26px;
+  min-width:155px;
+  max-width:52%;
+  padding:8px 14px 10px;
+  background:linear-gradient(180deg,#e1cea7 0%,#d7c195 100%);
+  border:1px solid rgba(80,60,37,.22);
+  border-bottom:none;
+  border-radius:4px 4px 0 0;
+  font:700 10px var(--mono);
+  color:var(--red2);
+  letter-spacing:1px;
+  box-shadow:0 2px 0 rgba(255,247,230,.20) inset;
+}
+.dossier:after{
+  content:"";
+  position:absolute;
+  right:-15px;
+  top:0;
+  width:18px;
+  height:100%;
+  background:linear-gradient(180deg,#dac79f 0%,#d1bb90 100%);
+  border:1px solid rgba(80,60,37,.22);
+  border-left:none;
+  clip-path:polygon(0 0,100% 0,100% 100%,34% 100%);
+}
 .project-folder h3{font:400 23px var(--display);line-height:1.2;margin:0 0 14px;padding-right:80px}
 .project-folder p{font-size:13.5px;color:var(--ink2);line-height:1.68;margin:0}
 .tags{display:flex;gap:6px;flex-wrap:wrap;margin:17px 0}
-.tag{font:700 9.5px var(--mono);border:1px solid #75614a;padding:3px 7px}
+.tag{font:700 9.5px var(--mono);border:1px solid #75614a;padding:3px 7px;background:rgba(243,232,208,.2)}
 .pipeline{font:700 9.5px var(--mono);color:var(--red2);padding-top:12px;border-top:1px dashed rgba(70,52,35,.3);margin-top:14px}
 .attachments{margin-top:18px;font:700 10px var(--mono);color:var(--ink2)}
 .project-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:16px}
 .project-actions a,.project-actions button{border:0;background:none;padding:0;color:var(--red2);font:700 10.5px var(--mono);cursor:pointer}
 .project-actions a:hover,.project-actions button:hover{text-decoration:underline}
+
 
 .drawer{
   max-height:0;overflow:hidden;opacity:0;transition:max-height .8s ease,opacity .35s ease,margin .5s ease;
@@ -452,8 +478,10 @@ body.night .rain{opacity:.07}
   .focus-dossier,.skills-sheet,.contact-sheet{padding-left:22px;padding-right:22px}
   .focus-dossier:before,.skills-sheet:before{left:18px}
   .skill-row{grid-template-columns:1fr;gap:7px}
-  .project-folder{padding:30px 22px 26px}
+  .project-folder{padding:52px 22px 26px}
   .project-folder h3{padding-right:64px;font-size:21px}
+  .dossier{left:16px;top:-12px;max-width:68%;font-size:8.6px;padding:7px 10px 9px}
+  .dossier:after{right:-12px;width:14px}
   .status{font-size:8px}
   .contact-row{grid-template-columns:1fr}
   .contact-row a{grid-column:1}
@@ -494,7 +522,7 @@ body.night .rain{opacity:.07}
           <a class="btn" href="https://github.com/Seanfrvr" target="_blank">GitHub</a>
         </div>
 
-        <div class="joker-note">HAHAHA</div>
+        <div class="joker-note laugh-note"><span>HA</span><span>HA</span><span>HA!</span></div>
         <div class="joker" id="joker" title="classified">
           <span class="j a">J</span><span class="j b">J</span><div class="joker-face"></div>
         </div>
@@ -618,7 +646,7 @@ body.night .rain{opacity:.07}
 
           <article class="project-folder">
             <div class="pin"></div><div class="status">COMPLETE</div>
-            <div class="dossier">DOSSIER 01 · FEATURED</div>
+            <div class="dossier">DOSSIER 01</div>
             <h3>Threat Hunting with Splunk Home Lab</h3>
             <p>Splunk threat hunting lab built around BOTSv3. Three investigations use SPL, event correlation and ATT&amp;CK mapping to move from hypothesis to evidence backed findings.</p>
             <div class="tags"><span class="tag">SPLUNK</span><span class="tag">BOTSv3</span><span class="tag">MITRE ATT&amp;CK</span></div>
@@ -705,3 +733,10 @@ body.night .rain{opacity:.07}
 </script>
 </body>
 </html>
+<style>
+.laugh-note{display:flex;align-items:flex-end;gap:7px;letter-spacing:0}
+.laugh-note span{display:inline-block}
+.laugh-note span:nth-child(1){transform:translateY(-2px) rotate(-8deg)}
+.laugh-note span:nth-child(2){transform:translateY(3px) rotate(5deg)}
+.laugh-note span:nth-child(3){transform:translateY(-4px) rotate(-6deg)}
+</style>
