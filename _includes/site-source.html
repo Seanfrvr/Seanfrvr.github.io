@@ -1758,6 +1758,197 @@ footer{
 }
 </style>
 
+
+<style id="felix-theme-preview-only">
+/* =========================================================
+   FELIX-ERA CAT THEME SWITCH PREVIEW
+   DARK REMAINS THE DEFAULT.
+   No existing layout/content values are changed.
+   ========================================================= */
+
+.theme-toggle{
+  width:44px;
+  height:44px;
+  flex:0 0 44px;
+  padding:0;
+  margin:0 0 0 2px;
+  border:0;
+  background:transparent;
+  cursor:pointer;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  position:relative;
+  z-index:2;
+  -webkit-tap-highlight-color:transparent;
+}
+
+.theme-toggle svg{
+  width:40px;
+  height:40px;
+  display:block;
+  overflow:visible;
+  filter:drop-shadow(0 3px 4px rgba(0,0,0,.34));
+  transition:transform .18s ease,filter .18s ease;
+}
+
+.theme-toggle:hover svg{
+  transform:rotate(-5deg) scale(1.06);
+}
+
+.theme-toggle:active svg{
+  transform:scale(.93);
+}
+
+.theme-toggle:focus-visible{
+  outline:2px solid var(--red);
+  outline-offset:3px;
+}
+
+/* Small expression change between themes */
+.theme-toggle .cat-eye,
+.theme-toggle .cat-mouth,
+.theme-toggle .theme-orb{
+  transition:transform .18s ease, fill .18s ease, stroke .18s ease;
+  transform-box:fill-box;
+  transform-origin:center;
+}
+
+body.light-mode .theme-toggle .cat-eye{
+  transform:translateY(-1px);
+}
+
+body.light-mode .theme-toggle .cat-mouth{
+  transform:scaleX(.86);
+}
+
+/* ---------- LIGHT MODE ONLY ---------- */
+body.light-mode{
+  --bg:#e7dcc2;
+  --bg2:#d7c7a7;
+  --paper:#f3e7c8;
+  --paper2:#dec99d;
+  --paper3:#cbb484;
+  --ink:#211a14;
+  --ink2:#514538;
+  --cream:#2b231b;
+  --white:#17120e;
+  --screen:#181b17;
+  --screenText:#c7d6b0;
+
+  background:
+    radial-gradient(circle at 14% 12%,rgba(255,255,255,.28),transparent 30%),
+    radial-gradient(circle at 84% 28%,rgba(163,60,52,.055),transparent 31%),
+    radial-gradient(circle at 55% 80%,rgba(109,140,103,.05),transparent 28%),
+    var(--bg);
+  color:var(--ink);
+}
+
+body.light-mode:before{
+  display:none !important;
+}
+
+body.light-mode .topbar{
+  background:rgba(236,222,189,.94);
+  border-bottom-color:rgba(33,26,20,.13);
+  box-shadow:0 10px 28px rgba(61,44,26,.12);
+}
+
+body.light-mode .brand{color:#30261d}
+body.light-mode .nav a{color:#655542}
+body.light-mode .nav a:hover{color:#1c1712}
+
+body.light-mode h1,
+body.light-mode .section h2{
+  color:#2b2119;
+}
+
+body.light-mode .support{color:#685947}
+body.light-mode .lede{color:#544738}
+body.light-mode .operator{color:#74614c}
+body.light-mode .operator b{color:#362b21}
+
+body.light-mode .hero-actions a{
+  border-color:#6f5d48;
+  color:#3c3024;
+  background:rgba(255,255,255,.16);
+}
+
+body.light-mode .hero-actions a:first-child{
+  background:#31271e;
+  border-color:#31271e;
+  color:#f0dfb9;
+}
+
+body.light-mode .hero-actions a:hover{
+  background:var(--red2);
+  border-color:var(--red2);
+  color:#f3e7c8;
+}
+
+body.light-mode .evidence-zone:before{
+  border-color:rgba(33,26,20,.075);
+  background:
+    linear-gradient(90deg,transparent 49.8%,rgba(33,26,20,.024) 50%,transparent 50.2%),
+    linear-gradient(180deg,transparent 49.8%,rgba(33,26,20,.024) 50%,transparent 50.2%);
+}
+
+body.light-mode .section-kicker{color:#675845}
+
+body.light-mode .focus-sticker{
+  border-color:rgba(33,26,20,.22);
+  background:#efe2c3;
+  color:#403328;
+  box-shadow:0 8px 18px rgba(71,50,29,.11);
+}
+
+body.light-mode .focus-sticker b{color:#526b4e}
+
+body.light-mode .skill-cluster{
+  border-color:rgba(33,26,20,.13);
+  background:#e2d3b3;
+}
+
+body.light-mode .skill-tag{
+  border-color:#71604c;
+  color:#32281f;
+  background:#f4e8ca;
+}
+
+body.light-mode .cluster-note{color:#665643}
+body.light-mode .case-mini-note{background:#d4bd89;color:#3f3328}
+body.light-mode .contact-note{color:var(--ink)}
+body.light-mode .contact-row{border-color:rgba(33,26,20,.13)}
+body.light-mode .contact-row .k{color:#655340}
+body.light-mode .contact-row a{color:#31261d}
+body.light-mode .final-clue strong{color:#30251c}
+body.light-mode footer{
+  color:#675744;
+  border-top-color:rgba(33,26,20,.10);
+}
+
+body.light-mode .exhibit-screen{
+  color:var(--screenText);
+}
+
+body.light-mode .theme-toggle svg{
+  filter:drop-shadow(0 3px 4px rgba(61,44,26,.24));
+}
+
+@media(max-width:700px){
+  .theme-toggle{
+    width:40px;
+    height:40px;
+    flex-basis:40px;
+  }
+
+  .theme-toggle svg{
+    width:36px;
+    height:36px;
+  }
+}
+</style>
+
 </head>
 <body>
 <div class="site">
@@ -1770,6 +1961,45 @@ footer{
       <a href="#skills">skills</a>
       <a href="#cases">case files</a>
       <a href="#contact">contact</a>
+
+      <button class="theme-toggle" id="themeToggle" type="button"
+              aria-label="Switch to light mode" title="Light / dark mode">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <!-- 1920s silent-cartoon black cat silhouette -->
+          <path d="M14 24 L12 8 L25 17
+                   C29 14 35 14 39 17
+                   L52 8 L50 25
+                   C55 29 57 35 55 42
+                   C52 53 43 58 32 58
+                   C21 58 12 53 9 43
+                   C7 35 9 29 14 24Z"
+                fill="#0f0f0f" stroke="#e6d5ad" stroke-width="2.2" stroke-linejoin="round"/>
+
+          <!-- classic white oval eyes -->
+          <ellipse cx="25" cy="31" rx="6.2" ry="9.3" fill="#fff9e9"/>
+          <ellipse cx="39" cy="31" rx="6.2" ry="9.3" fill="#fff9e9"/>
+
+          <ellipse class="cat-eye" cx="27" cy="34" rx="2.4" ry="4.2" fill="#111"/>
+          <ellipse class="cat-eye" cx="41" cy="34" rx="2.4" ry="4.2" fill="#111"/>
+
+          <!-- tiny vintage nose -->
+          <path d="M29 41 Q32 39 35 41 Q32 45 29 41Z" fill="#a33c34"/>
+
+          <!-- grin -->
+          <path class="cat-mouth" d="M23 46 Q32 53 41 46"
+                fill="none" stroke="#fff1d2" stroke-width="2.4" stroke-linecap="round"/>
+
+          <!-- whiskers -->
+          <path d="M19 42 L7 39 M19 45 L6 47 M45 42 L57 39 M45 45 L58 47"
+                stroke="#e6d5ad" stroke-width="1.7" stroke-linecap="round"/>
+
+          <!-- theme cue: moon by default -->
+          <g class="theme-orb">
+            <circle cx="50" cy="13" r="7" fill="#e4d3a7" stroke="#201913" stroke-width="1.8"/>
+            <circle cx="53" cy="10" r="6" fill="#0f0f0f"/>
+          </g>
+        </svg>
+      </button>
     </nav>
   </div>
 </header>
@@ -1855,7 +2085,6 @@ footer{
 
       <div class="clue-note">“What did the telemetry prove and what did the alert miss?”</div>
 
-      <div class="laugh"><span>HA</span><span>HA</span><span>HA!</span></div>
     </div>
 
   </div>
@@ -2156,5 +2385,56 @@ footer{
   });
 })();
 </script>
+
+<script id="felix-theme-preview-script">
+(function(){
+  const button=document.getElementById('themeToggle');
+  if(!button) return;
+
+  const saved=localStorage.getItem('sean-caseboard-theme');
+
+  /* Dark remains the primary/default theme. */
+  if(saved==='light'){
+    document.body.classList.add('light-mode');
+    button.setAttribute('aria-label','Switch to dark mode');
+
+    const orb=button.querySelector('.theme-orb');
+    if(orb){
+      orb.innerHTML='<circle cx="50" cy="13" r="6.5" fill="#d6a43c" stroke="#201913" stroke-width="1.8"/>' +
+                    '<path d="M50 2v4M50 20v4M39 13h4M57 13h4M42.5 5.5l3 3M54.5 17.5l3 3M57.5 5.5l-3 3M45.5 17.5l-3 3" stroke="#d6a43c" stroke-width="1.8" stroke-linecap="round"/>';
+    }
+  }
+
+  function setOrb(isLight){
+    const orb=button.querySelector('.theme-orb');
+    if(!orb) return;
+
+    if(isLight){
+      orb.innerHTML='<circle cx="50" cy="13" r="6.5" fill="#d6a43c" stroke="#201913" stroke-width="1.8"/>' +
+                    '<path d="M50 2v4M50 20v4M39 13h4M57 13h4M42.5 5.5l3 3M54.5 17.5l3 3M57.5 5.5l-3 3M45.5 17.5l-3 3" stroke="#d6a43c" stroke-width="1.8" stroke-linecap="round"/>';
+    }else{
+      orb.innerHTML='<circle cx="50" cy="13" r="7" fill="#e4d3a7" stroke="#201913" stroke-width="1.8"/>' +
+                    '<circle cx="53" cy="10" r="6" fill="#0f0f0f"/>';
+    }
+  }
+
+  button.addEventListener('click',()=>{
+    const isLight=document.body.classList.toggle('light-mode');
+
+    localStorage.setItem(
+      'sean-caseboard-theme',
+      isLight ? 'light' : 'dark'
+    );
+
+    button.setAttribute(
+      'aria-label',
+      isLight ? 'Switch to dark mode' : 'Switch to light mode'
+    );
+
+    setOrb(isLight);
+  });
+})();
+</script>
+
 </body>
 </html>
