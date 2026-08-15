@@ -1762,7 +1762,7 @@ footer{
 <style id="felix-theme-preview-only">
 /* =========================================================
    FELIX-ERA CAT THEME SWITCH PREVIEW
-   DARK REMAINS THE DEFAULT.
+   LIGHT IS THE DEFAULT.
    No existing layout/content values are changed.
    ========================================================= */
 
@@ -1950,7 +1950,7 @@ body.light-mode .theme-toggle svg{
 </style>
 
 </head>
-<body>
+<body class="light-mode">
 <div class="site">
 
 <header class="topbar">
@@ -2393,8 +2393,11 @@ body.light-mode .theme-toggle svg{
 
   const saved=localStorage.getItem('sean-caseboard-theme');
 
-  /* Dark remains the primary/default theme. */
-  if(saved==='light'){
+  /* Light is now the primary/default theme. */
+  if(saved==='dark'){
+    document.body.classList.remove('light-mode');
+    button.setAttribute('aria-label','Switch to light mode');
+  }else{
     document.body.classList.add('light-mode');
     button.setAttribute('aria-label','Switch to dark mode');
 
