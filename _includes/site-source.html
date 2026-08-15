@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="theme-color" content="#16110d">
-<title>Sean's Case Files</title>
+<title>Sean Caseboard</title>
 <meta name="description" content="Sean. Threat Hunter and Blue Team Investigator. Threat hunting, detection engineering, SOC investigations and evidence backed blue team case work.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,7 +26,7 @@
   --screen:#181b17;
   --screenText:#c7d6b0;
   --white:#fff7df;
-  --display:'Special Elite',cursive;
+  --display:'Special Elite','Courier New',monospace;
   --mono:'Courier Prime',monospace;
   --sans:'Inter',system-ui,sans-serif;
 }
@@ -1260,6 +1260,88 @@ h1{
 }
 </style>
 
+
+<style id="sean-final-tweaks">
+/* Remove old hero label spacing and let Sean sit cleaner */
+.hero-copy{
+  padding-top:8px;
+}
+
+/* Reposition evidence pins so they don't block the text */
+.pin.p1{top:20px;left:50%}
+.pin.p2{top:176px;left:42px}
+.pin.p3{top:290px;right:34px}
+.pin.p4{bottom:86px;left:255px}
+
+/* Mobile-safe pin positions */
+@media(max-width:700px){
+  .pin.p1{top:16px;left:52%}
+  .pin.p2{top:192px;left:36px}
+  .pin.p3{top:336px;right:26px}
+  .pin.p4{bottom:92px;left:56%}
+}
+@media(max-width:500px){
+  .pin.p1{top:14px;left:54%}
+  .pin.p2{top:212px;left:30px}
+  .pin.p3{top:372px;right:18px}
+  .pin.p4{bottom:92px;left:58%}
+}
+
+/* Remove the boxed panel look from Follow the evidence */
+.final-clue{
+  min-height:auto;
+  padding:8px 0 0;
+  background:transparent;
+  border:0;
+  box-shadow:none;
+  display:block;
+  text-align:left;
+}
+
+.final-clue:before,
+.final-clue:after,
+.final-clue .small{
+  display:none !important;
+}
+
+.final-clue strong{
+  display:block;
+  max-width:none;
+  color:var(--paper);
+  font:400 34px/1.05 var(--display);
+  text-shadow:2px 2px 0 rgba(111,36,31,.35);
+}
+
+@media(max-width:500px){
+  .final-clue strong{
+    font-size:26px;
+  }
+}
+</style>
+
+
+<style id="final-aws-pin-fix">
+/* Move the SIEM exhibit pin away from the AWS CloudTrail line */
+.pin.p2{
+  top:202px;
+  left:12px;
+}
+
+@media(max-width:700px){
+  .pin.p2{
+    top:220px;
+    left:8px;
+  }
+}
+
+@media(max-width:500px){
+  .pin.p2{
+    top:242px;
+    left:6px;
+  }
+}
+</style>
+
 </head>
 <body>
 <div class="site">
@@ -1280,7 +1362,6 @@ h1{
   <div class="wrap hero-grid">
 
     <div class="hero-copy">
-      <div class="case-label">ACTIVE INVESTIGATOR</div>
       <h1>Sean</h1>
       <div class="role">Threat Hunter</div>
       <div class="support">Blue Team Investigator</div>
@@ -1621,7 +1702,6 @@ h1{
 
       <div class="final-clue">
         <strong>Follow the evidence.</strong>
-        <div class="small">HA HA HA!</div>
       </div>
     </div>
 
