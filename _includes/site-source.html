@@ -311,8 +311,8 @@ h1{font:400 clamp(48px,7vw,82px) var(--display);line-height:.98;margin:0 0 8px}
 .contact-row .k{font:700 11px var(--mono)}.contact-row .dots{border-bottom:1px dotted rgba(52,39,25,.35)}.contact-row a{font:700 11px var(--mono);color:var(--red2)}
 footer{margin-top:30px;display:flex;justify-content:space-between;gap:15px;color:#cdb797;font:700 10px var(--mono)}
 
-.rain{position:fixed;inset:0;pointer-events:none;z-index:1;opacity:0;background-image:repeating-linear-gradient(112deg,transparent 0 14px,rgba(224,230,225,.07) 15px,transparent 16px 30px);background-size:100% 160px;animation:rain 1.2s linear infinite;transition:.35s}
-body.night .rain{opacity:.24}
+.rain{position:fixed;inset:0;pointer-events:none;z-index:1;opacity:0;background-image:repeating-linear-gradient(112deg,transparent 0 14px,rgba(224,230,225,.025) 15px,transparent 16px 30px);background-size:100% 160px;animation:rain 1.2s linear infinite;transition:.35s}
+body.night .rain{opacity:.07}
 @keyframes rain{from{background-position:0 -160px}to{background-position:-45px 160px}}
 
 @media(max-width:980px){
