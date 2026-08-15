@@ -1342,6 +1342,422 @@ h1{
 }
 </style>
 
+
+<style id="render-quality-only">
+/*
+  Rendering quality only.
+  No sizes, spacing, colours, positions or layout values are changed.
+*/
+html{
+  text-rendering:optimizeLegibility;
+  -webkit-text-size-adjust:100%;
+  font-kerning:normal;
+}
+
+body{
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  font-synthesis:none;
+}
+
+h1,
+h2,
+h3,
+h4,
+.brand,
+.role,
+.support,
+.operator,
+.rule-note,
+.exhibit-screen,
+.exhibit-caption,
+.clue-note,
+.focus-note,
+.focus-sticker,
+.skill-tag,
+.cluster-note,
+.case-copy,
+.case-mini-note,
+.case-tag,
+.case-line,
+.attachments,
+.actions,
+.status,
+.slip,
+.contact-note,
+.final-clue,
+footer{
+  text-rendering:optimizeLegibility;
+  font-kerning:normal;
+}
+
+/* Helps rotated paper pieces composite cleanly without changing geometry */
+.exhibit,
+.rule-note,
+.clue-note,
+.focus-note,
+.focus-sticker,
+.skill-tag,
+.case-copy,
+.case-mini-note,
+.case-tag,
+.slip{
+  -webkit-backface-visibility:hidden;
+  backface-visibility:hidden;
+}
+</style>
+
+
+<style id="ultra-smooth-quality-pass">
+/* =========================================================
+   ULTRA SMOOTH QUALITY PASS
+   Removes pixel-like grain and scanline noise while keeping
+   the same layout, colours, content and retro cartoon style.
+   ========================================================= */
+
+/* Cleaner global rendering */
+html{
+  text-rendering:geometricPrecision;
+  -webkit-text-size-adjust:100%;
+}
+
+body{
+  -webkit-font-smoothing:subpixel-antialiased;
+  -moz-osx-font-smoothing:auto;
+  font-kerning:normal;
+  font-synthesis:none;
+}
+
+/* Remove tiny repeating dot/line texture that can look pixelated */
+body:before{
+  opacity:.055 !important;
+  background:
+    radial-gradient(circle at 20% 20%,rgba(255,255,255,.045),transparent 34%),
+    linear-gradient(180deg,rgba(255,255,255,.012),transparent 32%,rgba(0,0,0,.018)) !important;
+}
+
+/* Replace CRT pixel scanlines with a smooth glass-like screen finish */
+.exhibit-screen:after{
+  content:"" !important;
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  opacity:1 !important;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,.025),
+      transparent 24%,
+      transparent 74%,
+      rgba(0,0,0,.055)
+    ) !important;
+}
+
+/* Smoother screen surface without changing colour */
+.exhibit-screen{
+  background:
+    radial-gradient(circle at 48% 38%,rgba(199,214,176,.025),transparent 62%),
+    var(--screen) !important;
+}
+
+/* Precision glyph rendering */
+h1,
+h2,
+h3,
+h4,
+.brand,
+.role,
+.support,
+.operator,
+.rule-note,
+.exhibit-screen,
+.exhibit-caption,
+.clue-note,
+.focus-note,
+.focus-sticker,
+.skill-tag,
+.cluster-note,
+.case-copy,
+.case-mini-note,
+.case-tag,
+.case-line,
+.attachments,
+.actions,
+.status,
+.slip,
+.contact-note,
+.final-clue,
+footer{
+  text-rendering:geometricPrecision;
+  font-kerning:normal;
+}
+
+/* Keep typewriter labels clean rather than artificially rough */
+.brand,
+.role,
+.support,
+.operator,
+.exhibit-screen,
+.exhibit-caption,
+.idx,
+.status,
+.skill-tag,
+.case-tag,
+.case-line,
+.attachments,
+.actions,
+.slip-id,
+.slip-note,
+.contact-row,
+footer{
+  font-feature-settings:"kern" 1;
+}
+
+/* Smooth paper gradients to avoid visible banding */
+.case-copy,
+.focus-note,
+.contact-note,
+.rule-note,
+.clue-note,
+.slip{
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,.085),
+      rgba(255,255,255,.025) 24%,
+      transparent 52%
+    );
+}
+
+/* Preserve existing base colour behind the gradient */
+.case-copy,
+.focus-note,
+.contact-note,
+.rule-note,
+.slip{
+  background-color:var(--paper);
+}
+
+.clue-note{
+  background-color:#d3bc85;
+}
+
+/* Softer shadow rasterisation while preserving positions and proportions */
+.exhibit{
+  box-shadow:
+    0 16px 30px rgba(0,0,0,.28),
+    6px 7px 0 rgba(111,36,31,.28) !important;
+}
+
+.case-copy{
+  box-shadow:
+    0 19px 36px rgba(0,0,0,.27),
+    7px 8px 0 rgba(111,36,31,.26) !important;
+}
+
+.rule-note,
+.clue-note{
+  box-shadow:
+    0 15px 28px rgba(0,0,0,.24),
+    5px 6px 0 rgba(111,36,31,.28) !important;
+}
+
+/* Avoid browser scaling artifacts on fine borders */
+.exhibit,
+.rule-note,
+.clue-note,
+.focus-note,
+.case-copy,
+.contact-note,
+.slip,
+.skill-tag,
+.case-tag,
+.status{
+  -webkit-backface-visibility:hidden;
+  backface-visibility:hidden;
+}
+
+/* High DPI screens can still use antialiased rendering */
+@media (min-resolution:1.5dppx){
+  body{
+    -webkit-font-smoothing:antialiased;
+  }
+}
+
+/* Lower DPI laptop and desktop displays use native subpixel rendering */
+@media (max-resolution:1.49dppx){
+  body,
+  h1,
+  h2,
+  h3,
+  h4,
+  .brand,
+  .role,
+  .support,
+  .operator,
+  .rule-note,
+  .exhibit-screen,
+  .exhibit-caption,
+  .clue-note,
+  .focus-note,
+  .focus-sticker,
+  .skill-tag,
+  .cluster-note,
+  .case-copy,
+  .case-mini-note,
+  .case-tag,
+  .case-line,
+  .attachments,
+  .actions,
+  .status,
+  .slip,
+  .contact-note,
+  .final-clue,
+  footer{
+    -webkit-font-smoothing:subpixel-antialiased;
+  }
+}
+</style>
+
+
+<style id="max-clean-vector-pass">
+/* =========================================================
+   MAX CLEAN / LOW DPI DESKTOP PASS
+   Mobile and high DPI screens keep the full cartoon character.
+   Lower DPI displays get cleaner text and non-rotated surfaces
+   so diagonal glyph rasterisation cannot look jagged.
+   ========================================================= */
+
+/* Remove all remaining artificial pixel/grain overlays globally */
+body:before{
+  display:none !important;
+}
+
+.exhibit-screen:after{
+  display:none !important;
+}
+
+/* Keep smooth shading only */
+.exhibit-screen{
+  background:
+    radial-gradient(circle at 48% 35%,rgba(199,214,176,.025),transparent 66%),
+    linear-gradient(180deg,rgba(255,255,255,.015),transparent 35%,rgba(0,0,0,.035)),
+    var(--screen) !important;
+}
+
+/* No synthetic roughness on text */
+h1,
+h2,
+h3,
+h4,
+.brand,
+.role,
+.support,
+.operator,
+.rule-note,
+.exhibit-screen,
+.exhibit-caption,
+.clue-note,
+.focus-note,
+.focus-sticker,
+.skill-tag,
+.cluster-note,
+.case-copy,
+.case-mini-note,
+.case-tag,
+.case-line,
+.attachments,
+.actions,
+.status,
+.slip,
+.contact-note,
+.final-clue,
+footer{
+  text-shadow:none !important;
+  filter:none !important;
+}
+
+/* Lower DPI screens: avoid rotated text and composited text layers */
+@media (max-resolution:1.49dppx){
+
+  .exhibit,
+  .exhibit.one,
+  .exhibit.two,
+  .exhibit.three,
+  .rule-note,
+  .clue-note,
+  .focus-note,
+  .focus-sticker,
+  .skill-tag,
+  .case-copy,
+  .case-copy:before,
+  .status,
+  .case-mini-note,
+  .case-tag,
+  .slip,
+  .laugh,
+  .laugh span{
+    transform:none !important;
+  }
+
+  .exhibit,
+  .rule-note,
+  .clue-note,
+  .focus-note,
+  .focus-sticker,
+  .skill-tag,
+  .case-copy,
+  .case-mini-note,
+  .case-tag,
+  .slip{
+    -webkit-backface-visibility:visible !important;
+    backface-visibility:visible !important;
+  }
+
+  body{
+    -webkit-font-smoothing:subpixel-antialiased !important;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  .brand,
+  .role,
+  .support,
+  .operator,
+  .rule-note,
+  .exhibit-screen,
+  .exhibit-caption,
+  .clue-note,
+  .focus-note,
+  .focus-sticker,
+  .skill-tag,
+  .cluster-note,
+  .case-copy,
+  .case-mini-note,
+  .case-tag,
+  .case-line,
+  .attachments,
+  .actions,
+  .status,
+  .slip,
+  .contact-note,
+  .final-clue,
+  footer{
+    text-rendering:geometricPrecision !important;
+    -webkit-font-smoothing:subpixel-antialiased !important;
+  }
+}
+
+/* High DPI screens retain the playful rotation treatment */
+@media (min-resolution:1.5dppx){
+  body{
+    -webkit-font-smoothing:antialiased !important;
+  }
+}
+</style>
+
 </head>
 <body>
 <div class="site">
