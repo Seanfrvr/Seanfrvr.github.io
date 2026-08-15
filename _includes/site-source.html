@@ -1949,6 +1949,22 @@ body.light-mode .theme-toggle svg{
 }
 </style>
 
+
+<style id="thread-connection-fix">
+#evidenceThreads{
+  width:100%;
+  height:100%;
+  overflow:visible;
+}
+#evidenceThreads path{
+  fill:none;
+  stroke:var(--red);
+  stroke-width:2;
+  opacity:.75;
+  stroke-linecap:round;
+}
+</style>
+
 </head>
 <body class="light-mode">
 <div class="site">
@@ -2028,13 +2044,7 @@ body.light-mode .theme-toggle svg{
 
     <div class="evidence-zone">
       <div class="thread">
-        <svg viewBox="0 0 500 620" preserveAspectRatio="none" aria-hidden="true">
-          <path d="M225 28 C165 74 120 125 105 184" />
-          <path d="M225 28 C320 106 390 188 423 288" />
-          <path d="M105 184 C150 248 180 330 152 478" />
-          <path d="M423 288 C355 352 300 428 205 520" />
-          <path d="M152 478 C185 498 196 510 205 520" />
-        </svg>
+        <svg id="evidenceThreads" aria-hidden="true"></svg>
       </div>
 
       <span class="pin p1"></span>
@@ -2436,6 +2446,71 @@ body.light-mode .theme-toggle svg{
 
     setOrb(isLight);
   });
+})();
+</script>
+
+
+<script id="dynamic-thread-connector">
+(function(){
+  function centerWithinZone(zone, el){
+    const zr = zone.getBoundingClientRect();
+    const r = el.getBoundingClientRect();
+    return {
+      x: r.left - zr.left + r.width / 2,
+      y: r.top - zr.top + r.height / 2
+    };
+  }
+
+  function path(svg, d){
+    const p = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    p.setAttribute("d", d);
+    svg.appendChild(p);
+  }
+
+  function redrawThreads(){
+    const zone = document.querySelector(".evidence-zone");
+    const svg = document.getElementById("evidenceThreads");
+    if(!zone || !svg) return;
+
+    const p1 = zone.querySelector(".pin.p1");
+    const p2 = zone.querySelector(".pin.p2");
+    const p3 = zone.querySelector(".pin.p3");
+    const p4 = zone.querySelector(".pin.p4");
+    if(!p1 || !p2 || !p3 || !p4) return;
+
+    const w = zone.clientWidth;
+    const h = zone.clientHeight;
+
+    svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
+    svg.setAttribute("preserveAspectRatio", "none");
+    svg.innerHTML = "";
+
+    const a = centerWithinZone(zone, p1);
+    const b = centerWithinZone(zone, p2);
+    const c = centerWithinZone(zone, p3);
+    const d = centerWithinZone(zone, p4);
+
+    // Curves designed to preserve the current look,
+    // but always end exactly at the real red-pin centers.
+    path(svg, `M ${a.x} ${a.y} C ${a.x-70} ${a.y+42}, ${b.x+22} ${b.y-54}, ${b.x} ${b.y}`);
+    path(svg, `M ${a.x} ${a.y} C ${a.x+95} ${a.y+78}, ${c.x-55} ${c.y-96}, ${c.x} ${c.y}`);
+    path(svg, `M ${b.x} ${b.y} C ${b.x+44} ${b.y+74}, ${d.x-36} ${d.y-92}, ${d.x} ${d.y}`);
+    path(svg, `M ${c.x} ${c.y} C ${c.x-72} ${c.y+78}, ${d.x+34} ${d.y-60}, ${d.x} ${d.y}`);
+  }
+
+  let raf = null;
+  function requestRedraw(){
+    if(raf) cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(redrawThreads);
+  }
+
+  window.addEventListener("load", requestRedraw, {passive:true});
+  window.addEventListener("resize", requestRedraw, {passive:true});
+  document.addEventListener("DOMContentLoaded", requestRedraw);
+
+  // Slight delay after fonts/layout settle on mobile.
+  setTimeout(requestRedraw, 120);
+  setTimeout(requestRedraw, 420);
 })();
 </script>
 
