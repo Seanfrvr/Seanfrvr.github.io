@@ -17,4 +17,5 @@
 <meta name="twitter:title" content="Sean's Case Files" />
 <meta name="twitter:description" content="Blue team investigations, threat hunting, detection engineering and network forensics." />
 <meta name="twitter:image" content="https://seanfrvr.github.io/social-preview-v2.jpg" />{%- endcapture -%}
-{{ source | replace: marker, replacement }}
+{%- capture laugh -%}<div class="laugh"><span>HA</span><span>HA</span><span>HA!</span></div>{%- endcapture -%}
+{{ source | replace: marker, replacement | remove: laugh }}
