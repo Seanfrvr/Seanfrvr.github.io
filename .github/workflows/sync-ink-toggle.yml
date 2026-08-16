@@ -22,25 +22,19 @@ jobs:
         run: |
           python3 - <<'PY'
           from pathlib import Path
-          import re
 
           path = Path('index.html')
           text = path.read_text(encoding='utf-8')
 
-          new_svg = r'''<svg viewBox=\"0 0 64 64\" aria-hidden=\"true\"><path d=\"M14 24 L12 8 L25 17 C29 14 35 14 39 17 L52 8 L50 25 C55 29 57 35 55 42 C52 53 43 58 32 58 C21 58 12 53 9 43 C7 35 9 29 14 24Z\" fill=\"#0f0f0f\" stroke=\"#e6d5ad\" stroke-width=\"2.2\" stroke-linejoin=\"round\"/><ellipse cx=\"25\" cy=\"31\" rx=\"6.2\" ry=\"9.3\" fill=\"#fff9e9\"/><ellipse cx=\"39\" cy=\"31\" rx=\"6.2\" ry=\"9.3\" fill=\"#fff9e9\"/><ellipse class=\"cat-eye\" cx=\"27\" cy=\"34\" rx=\"2.4\" ry=\"4.2\" fill=\"#111\"/><ellipse class=\"cat-eye\" cx=\"41\" cy=\"34\" rx=\"2.4\" ry=\"4.2\" fill=\"#111\"/><path d=\"M29 41 Q32 39 35 41 Q32 45 29 41Z\" fill=\"#a33c34\"/><path class=\"cat-mouth\" d=\"M23 46 Q32 53 41 46\" fill=\"none\" stroke=\"#fff1d2\" stroke-width=\"2.4\" stroke-linecap=\"round\"/><path d=\"M19 42 L7 39 M19 45 L6 47 M45 42 L57 39 M45 45 L58 47\" stroke=\"#e6d5ad\" stroke-width=\"1.7\" stroke-linecap=\"round\"/><circle id=\"themeOrb\" cx=\"52\" cy=\"12\" r=\"6\" fill=\"#d8a83e\" stroke=\"#211a14\" stroke-width=\"1.8\"/></svg>'''
+          old = r'''<svg viewBox=\"0 0 64 64\" aria-hidden=\"true\"><path d=\"M14 24 L12 8 L25 17 C30 14 36 14 41 17 L53 9 L51 25 C56 29 58 36 56 43 C53 53 43 59 32 59 C20 59 10 52 8 42 C6 34 9 28 14 24Z\" fill=\"#111\"/><ellipse cx=\"24\" cy=\"34\" rx=\"7.5\" ry=\"10\" fill=\"#f5e8c7\"/><ellipse cx=\"40\" cy=\"34\" rx=\"7.5\" ry=\"10\" fill=\"#f5e8c7\"/><circle cx=\"26\" cy=\"36\" r=\"2.8\" fill=\"#111\"/><circle cx=\"38\" cy=\"36\" r=\"2.8\" fill=\"#111\"/><ellipse cx=\"32\" cy=\"43\" rx=\"4\" ry=\"2.6\" fill=\"#f5e8c7\"/><path d=\"M26 48 Q32 53 39 48\" fill=\"none\" stroke=\"#f5e8c7\" stroke-width=\"2\" stroke-linecap=\"round\"/><circle id=\"themeOrb\" cx=\"52\" cy=\"12\" r=\"6\" fill=\"#d8a83e\" stroke=\"#211a14\" stroke-width=\"1.8\"/><\/svg>'''
 
-          pattern = re.compile(
-              r'(<button class=\\"theme-toggle\\" id=\\"themeToggle\\" aria-label=\\"Switch to dark mode\\" title=\\"Light / dark mode\\">)'
-              r'<svg viewBox=\\"0 0 64 64\\".*?</svg>'
-              r'(<\\/button>)',
-              re.S,
-          )
+          new = r'''<svg viewBox=\"0 0 64 64\" aria-hidden=\"true\"><path d=\"M14 24 L12 8 L25 17 C29 14 35 14 39 17 L52 8 L50 25 C55 29 57 35 55 42 C52 53 43 58 32 58 C21 58 12 53 9 43 C7 35 9 29 14 24Z\" fill=\"#0f0f0f\" stroke=\"#e6d5ad\" stroke-width=\"2.2\" stroke-linejoin=\"round\"/><ellipse cx=\"25\" cy=\"31\" rx=\"6.2\" ry=\"9.3\" fill=\"#fff9e9\"/><ellipse cx=\"39\" cy=\"31\" rx=\"6.2\" ry=\"9.3\" fill=\"#fff9e9\"/><ellipse class=\"cat-eye\" cx=\"27\" cy=\"34\" rx=\"2.4\" ry=\"4.2\" fill=\"#111\"/><ellipse class=\"cat-eye\" cx=\"41\" cy=\"34\" rx=\"2.4\" ry=\"4.2\" fill=\"#111\"/><path d=\"M29 41 Q32 39 35 41 Q32 45 29 41Z\" fill=\"#a33c34\"/><path class=\"cat-mouth\" d=\"M23 46 Q32 53 41 46\" fill=\"none\" stroke=\"#fff1d2\" stroke-width=\"2.4\" stroke-linecap=\"round\"/><path d=\"M19 42 L7 39 M19 45 L6 47 M45 42 L57 39 M45 45 L58 47\" stroke=\"#e6d5ad\" stroke-width=\"1.7\" stroke-linecap=\"round\"/><circle id=\"themeOrb\" cx=\"52\" cy=\"12\" r=\"6\" fill=\"#d8a83e\" stroke=\"#211a14\" stroke-width=\"1.8\"/><\/svg>'''
 
-          updated, count = pattern.subn(lambda m: m.group(1) + new_svg + m.group(2), text, count=1)
+          count = text.count(old)
           if count != 1:
-              raise SystemExit(f'Expected exactly one embedded Case 03 theme-toggle SVG, found {count}. No file written.')
+              raise SystemExit(f'Expected exactly one embedded Case 03 mascot SVG, found {count}. No file written.')
 
-          path.write_text(updated, encoding='utf-8')
+          path.write_text(text.replace(old, new, 1), encoding='utf-8')
           PY
 
       - name: Verify the change is surgical
