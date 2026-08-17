@@ -1,0 +1,57 @@
+name: One-time PNG social preview patch
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/patch-social-preview-png.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch-social-preview-png:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Patch social preview image extension only
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path('index.html')
+          text = path.read_text(encoding='utf-8')
+
+          old_image = 'https://seanfrvr.github.io/social-preview-v2.jpg?v=20260817-0211'
+          new_image = 'https://seanfrvr.github.io/social-preview-v2.png?v=20260817-0226'
+
+          changed = False
+          if old_image in text:
+              text = text.replace(old_image, new_image)
+              changed = True
+          if '<meta property="og:image:type" content="image/jpeg">' in text:
+              text = text.replace('<meta property="og:image:type" content="image/jpeg">', '<meta property="og:image:type" content="image/png">')
+              changed = True
+
+          if not changed:
+              raise SystemExit('Expected JPG social-preview metadata not found. Refusing to modify index.html.')
+
+          path.write_text(text, encoding='utf-8')
+          print('Patched social preview metadata from JPG to PNG only.')
+          PY
+
+      - name: Commit patch
+        shell: bash
+        run: |
+          if git diff --quiet -- index.html; then
+            echo "No index.html changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Point social preview to PNG"
+          git push
