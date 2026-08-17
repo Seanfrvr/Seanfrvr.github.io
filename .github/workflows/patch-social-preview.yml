@@ -1,0 +1,70 @@
+name: One-time social preview patch
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/patch-social-preview.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch-social-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Patch social preview metadata only
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path('index.html')
+          text = path.read_text(encoding='utf-8')
+
+          if 'property="og:image"' in text:
+              print('Social preview metadata already present. Nothing to change.')
+              raise SystemExit(0)
+
+          needle = '<meta name="description" content="Sean. Threat Hunter and Blue Team Investigator. Threat hunting, detection engineering, SOC investigations and evidence backed blue team case work.">\n'
+
+          if needle not in text:
+              raise SystemExit('Expected description tag not found. Refusing to modify index.html.')
+
+          meta = '''<link rel="canonical" href="https://seanfrvr.github.io/">
+          <meta property="og:title" content="Sean Caseboard">
+          <meta property="og:description" content="Threat hunting, detection engineering, SOC investigations and evidence backed blue team case work.">
+          <meta property="og:type" content="website">
+          <meta property="og:url" content="https://seanfrvr.github.io/">
+          <meta property="og:image" content="https://seanfrvr.github.io/social-preview-v2.jpg?v=20260817-0211">
+          <meta property="og:image:type" content="image/jpeg">
+          <meta property="og:image:width" content="1200">
+          <meta property="og:image:height" content="630">
+          <meta property="og:image:alt" content="Ink, the black cat mascot for Sean Caseboard.">
+          <meta name="twitter:card" content="summary_large_image">
+          <meta name="twitter:title" content="Sean Caseboard">
+          <meta name="twitter:description" content="Threat hunting, detection engineering, SOC investigations and evidence backed blue team case work.">
+          <meta name="twitter:image" content="https://seanfrvr.github.io/social-preview-v2.jpg?v=20260817-0211">
+          '''
+
+          text = text.replace(needle, needle + meta, 1)
+          path.write_text(text, encoding='utf-8')
+          print('Patched index.html social metadata only.')
+          PY
+
+      - name: Commit patch
+        shell: bash
+        run: |
+          if git diff --quiet -- index.html; then
+            echo "No index.html changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Add social preview metadata"
+          git push
